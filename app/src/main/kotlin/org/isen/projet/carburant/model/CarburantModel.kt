@@ -7,15 +7,19 @@ import kotlin.properties.Delegates
 class CarburantModel {
     private val pcs = PropertyChangeSupport(this)
 
-    private var dummy: Int by Delegates.observable(0){ property, oldValue, newValue ->
+    // Liste des stations-service
+    var stations: List<Station> by Delegates.observable(emptyList()) { property, oldValue, newValue ->
         pcs.firePropertyChange(property.name, oldValue, newValue)
     }
 
-    fun update(nb:Int){
-        dummy = nb
+    // Méthode pour mettre à jour les stations
+    fun updateStations(newStations: List<Station>) {
+        stations = newStations
     }
 
-    fun addObserver(l : PropertyChangeListener){
+    // Ajouter un observer
+    fun addObserver(l: PropertyChangeListener) {
         pcs.addPropertyChangeListener(l)
     }
 }
+

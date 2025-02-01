@@ -7,20 +7,24 @@ import java.awt.GridLayout
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.beans.PropertyChangeEvent
-import javax.swing.JButton
-import javax.swing.JFrame
-import javax.swing.JPanel
-import javax.swing.WindowConstants
+import javax.swing.*
 
 class CarburantTestView(val ctrl: CarburantController) : JFrame("CarburantTestView"), ICarburantView, ActionListener {
-    init{
-        ctrl.registerView(this);
-        preferredSize = Dimension(300,200)
+
+    private val textArea = JTextArea()
+
+    init {
+        ctrl.registerView(this)
+        preferredSize = Dimension(400, 300)
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-        contentPane = JPanel().apply{ layout = GridLayout(1,2) }
-        val myButton = JButton("push")
+        contentPane = JPanel().apply { layout = GridLayout(2, 1) }
+
+        val myButton = JButton("Charger les stations")
         myButton.addActionListener(this)
+
         contentPane.add(myButton)
+        contentPane.add(JScrollPane(textArea))
+
         isVisible = false
         pack()
     }
@@ -33,12 +37,16 @@ class CarburantTestView(val ctrl: CarburantController) : JFrame("CarburantTestVi
         isVisible = false
     }
 
+    // Lorsque les données du modèle changent, on met à jour l'affichage
     override fun propertyChange(evt: PropertyChangeEvent) {
-        println("event : $evt")
+        if (evt.propertyName == "stations") {
+            val stations = evt.newValue as List<*>
+            textArea.text = stations.joinToString("\n") { it.toString() }
+        }
     }
 
     override fun actionPerformed(e: ActionEvent?) {
-        println("push")
-        this.ctrl.updateModel()
+        println("📡 Bouton pressé : récupération des stations en cours...")
+        ctrl.updateModel()
     }
 }
