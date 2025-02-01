@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="filename">test_my_logger</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %l - %msg%n"/>
+            <!-- <ThresholdFilter level="info"/> -->
+        </Console>
+
+        <RollingFile name="RFile" fileName="${filename}.log" filePattern="${filename}-%d{dd-MMM}-%i.log.gz">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5">
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="RFile"/>
+        </Root>
+        <Logger name="org.isen.projet.carburant" level="DEBUG" additivity="false"> <!-- référencer le bon package du projet -->
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RFile"/>
+        </Logger>
+    </Loggers>
+
+</Configuration>

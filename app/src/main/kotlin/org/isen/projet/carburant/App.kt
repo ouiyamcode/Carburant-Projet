@@ -3,13 +3,17 @@
  */
 package org.isen.projet.carburant
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
+import org.apache.logging.log4j.kotlin.Logging
+
+class App{
+    companion object : Logging
+    fun doStuff(){
+        logger.info("Projet")
+        logger.debug("Carburant")
+    }
 }
 
 fun main() {
-    println(App().greeting)
+    println("Start Test Logger Application...")
+    App().doStuff()
 }
