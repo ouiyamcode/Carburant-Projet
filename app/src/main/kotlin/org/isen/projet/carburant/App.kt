@@ -4,6 +4,9 @@
 package org.isen.projet.carburant
 
 import org.apache.logging.log4j.kotlin.Logging
+import org.isen.projet.carburant.ctrl.CarburantController
+import org.isen.projet.carburant.model.CarburantModel
+import org.isen.projet.carburant.view.impl.CarburantTestView
 
 class App{
     companion object : Logging
@@ -15,5 +18,10 @@ class App{
 
 fun main() {
     println("Start Test Logger Application...")
-    App().doStuff()
+    //App().doStuff()
+    val model = CarburantModel()
+    val controller = CarburantController(model)
+    val testGui = CarburantTestView(controller)
+
+    controller.displayAll()
 }
