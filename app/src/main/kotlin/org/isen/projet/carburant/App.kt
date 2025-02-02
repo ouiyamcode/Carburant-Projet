@@ -3,6 +3,7 @@
  */
 package org.isen.projet.carburant
 import org.isen.projet.carburant.ctrl.CarburantController
+import org.isen.projet.carburant.data.impl.SourceJson
 import org.isen.projet.carburant.model.CarburantModel
 import org.isen.projet.carburant.view.impl.CarburantTestView
 

@@ -1,38 +1,52 @@
 package org.isen.projet.carburant.ctrl
 
-import org.isen.projet.carburant.data.impl.SourceXml
-import org.isen.projet.carburant.model.CarburantModel
-import org.isen.projet.carburant.view.ICarburantView
 import kotlinx.coroutines.*
+import org.isen.projet.carburant.data.impl.SourceJson
+import org.isen.projet.carburant.model.CarburantModel
+import org.isen.projet.carburant.model.Station
+import org.isen.projet.carburant.view.ICarburantView
+import java.text.Normalizer
+import java.util.Locale
 
 class CarburantController(private val model: CarburantModel) {
     private val views = mutableListOf<ICarburantView>()
-    private val dataSource = SourceXml()
+    private val dataSource = SourceJson()
 
-    // Enregistrer une vue
     fun registerView(view: ICarburantView) {
         model.addObserver(view)
         views.add(view)
     }
 
-    // Afficher toutes les vues
     fun displayAll() {
         views.forEach { it.display() }
     }
 
-    // Mettre à jour le modèle avec les vraies données XML
-    fun updateModel() {
-        println("📡 Récupération des stations-service en cours...")
+    fun updateModelForCity(city: String) {
+        val normalizedCity = normalizeString(city)
+        println("📡 Récupération des stations-service pour la ville : $normalizedCity...")
 
         GlobalScope.launch(Dispatchers.IO) {
-            val xmlData = dataSource.fetchData()
-            val stations = dataSource.parseData(xmlData)
+            val jsonData = dataSource.fetchDataForCity(normalizedCity)
+            val stations = dataSource.parseData(jsonData)
 
-            withContext(Dispatchers.Main) {
+            withContext(Dispatchers.Default) { // ✅ Utilisation de Default pour éviter Main
                 model.updateStations(stations)
-                println("✅ Modèle mis à jour avec ${stations.size} stations-service !")
+                println("✅ Modèle mis à jour avec ${stations.size} stations pour $normalizedCity !")
             }
         }
     }
+
+    // 🔥 Fonction pour normaliser une chaîne : supprime accents et met en minuscules
+    private fun normalizeString(input: String): String {
+        return Normalizer.normalize(input, Normalizer.Form.NFD)
+            .replace("\\p{M}".toRegex(), "")  // Supprime les accents
+            .uppercase(Locale.getDefault())  // Met en minuscules
+    }
 }
+
+
+
+
+
+
 

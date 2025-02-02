@@ -28,6 +28,8 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel-gson:2.3.1")
     implementation("com.github.kittinunf.fuel:fuel-coroutines:2.3.1")
     implementation("com.google.code.gson:gson:2.11.0")
+
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.0")
     // Use the Kotlin JUnit 5 integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 
