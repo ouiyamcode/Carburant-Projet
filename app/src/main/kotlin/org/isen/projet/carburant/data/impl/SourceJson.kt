@@ -17,10 +17,29 @@ class SourceJson : IDataSource {
         return fetchDataFromUrl("$baseUrl?limit=100")
     }
 
-    fun fetchDataForCity(city: String): String {
+    fun fetchDataForCity(
+        city: String,
+        fuelType: String? = null,
+        hasToilets: Boolean = false,
+        hasAirPump: Boolean = false,
+        hasFoodShop: Boolean = false
+    ): String {
         val cityNormalized = normalizeText(city)
         val cityEncoded = URLEncoder.encode(cityNormalized, "UTF-8")
-        val url = "$baseUrl?where=com_arm_name=\"$cityEncoded\"&limit=100"
+
+        var filters = "com_arm_name=\"$cityEncoded\""
+
+        // 🔥 Ajout des filtres dynamiques 🔥
+        if (fuelType != null) {
+            val fuelEncoded = URLEncoder.encode(fuelType, "UTF-8")
+            filters += " AND fuel=\"$fuelEncoded\""
+        }
+        if (hasToilets) filters += " AND services LIKE \"%Toilettes publiques%\""
+        if (hasAirPump) filters += " AND services LIKE \"%Station de gonflage%\""
+        if (hasFoodShop) filters += " AND services LIKE \"%Boutique alimentaire%\""
+
+        val url = "$baseUrl?where=$filters&limit=100"
+
         return fetchDataFromUrl(url)
     }
 
@@ -57,7 +76,7 @@ class SourceJson : IDataSource {
             for (record in records) {
                 val id = record["id"]?.toString() ?: continue
 
-                // 🔥 Correction : Vérification et extraction correcte de `geo_point`
+                // 🔥 Extraction correcte de `geo_point`
                 var latitude = "0.0"
                 var longitude = "0.0"
 
@@ -87,7 +106,6 @@ class SourceJson : IDataSource {
                     }
                 }
 
-                // 🔥 Vérification pour éviter les doublons
                 if (!stationsMap.containsKey(id)) {
                     stationsMap[id] = Station(id, latitude, longitude, codePostal, ville, adresse, prixCarburants)
 
