@@ -17,19 +17,18 @@ class SourceJson : IDataSource {
         return fetchDataFromUrl("$baseUrl?limit=100")
     }
 
-    fun fetchDataForCity(
+    override fun fetchDataForCity(
         city: String,
-        fuelType: String? = null,
-        hasToilets: Boolean = false,
-        hasAirPump: Boolean = false,
-        hasFoodShop: Boolean = false
-    ): String {
+        fuelType: String?,
+        hasToilets: Boolean,
+        hasAirPump: Boolean,
+        hasFoodShop: Boolean
+    ): List<Station> {
         val cityNormalized = normalizeText(city)
         val cityEncoded = URLEncoder.encode(cityNormalized, "UTF-8")
 
         var filters = "com_arm_name=\"$cityEncoded\""
 
-        // 🔥 Ajout des filtres dynamiques 🔥
         if (fuelType != null) {
             val fuelEncoded = URLEncoder.encode(fuelType, "UTF-8")
             filters += " AND fuel=\"$fuelEncoded\""
@@ -40,7 +39,8 @@ class SourceJson : IDataSource {
 
         val url = "$baseUrl?where=$filters&limit=100"
 
-        return fetchDataFromUrl(url)
+        val jsonData = fetchDataFromUrl(url)
+        return parseData(jsonData)
     }
 
     private fun fetchDataFromUrl(url: String): String {
@@ -76,7 +76,6 @@ class SourceJson : IDataSource {
             for (record in records) {
                 val id = record["id"]?.toString() ?: continue
 
-                // 🔥 Extraction correcte de `geo_point`
                 var latitude = "0.0"
                 var longitude = "0.0"
 
@@ -127,7 +126,6 @@ class SourceJson : IDataSource {
         return stationsMap.values.toList()
     }
 
-    // 🔥 Fonction pour normaliser les noms (supprimer accents et convertir en majuscules)
     private fun normalizeText(text: String): String {
         return Normalizer.normalize(text, Normalizer.Form.NFD)
             .replace("[\\p{InCombiningDiacriticalMarks}]".toRegex(), "")

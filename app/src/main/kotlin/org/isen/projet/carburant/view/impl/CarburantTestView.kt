@@ -27,6 +27,23 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         font = Font("Arial", Font.BOLD, 16)
         isFocusPainted = false
         border = BorderFactory.createLineBorder(Color(192, 57, 43), 2)
+        addActionListener(this@CarburantTestView)
+    }
+
+    private val primarySourceButton = JButton("🌍 Source Principale").apply {
+        background = Color(46, 204, 113)
+        foreground = Color.WHITE
+        font = Font("Arial", Font.BOLD, 14)
+        isFocusPainted = false
+        addActionListener(this@CarburantTestView)
+    }
+
+    private val secondarySourceButton = JButton("📡 Source Secondaire").apply {
+        background = Color(52, 152, 219)
+        foreground = Color.WHITE
+        font = Font("Arial", Font.BOLD, 14)
+        isFocusPainted = false
+        addActionListener(this@CarburantTestView)
     }
 
     private val tableModel = DefaultTableModel(arrayOf("ID", "Ville", "Adresse", "Latitude", "Longitude", "Prix"), 0)
@@ -39,8 +56,6 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         background = Color(230, 230, 230)
         selectionBackground = Color(52, 152, 219)
         selectionForeground = Color.WHITE
-
-        // ✅ Appliquer le renderer multi-ligne pour la colonne Prix
         getColumnModel().getColumn(5).cellRenderer = MultiLineTableCellRenderer()
     }
 
@@ -52,9 +67,8 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         }
 
         ctrl.registerView(this)
-        preferredSize = Dimension(1100, 600)
+        preferredSize = Dimension(1200, 600)
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-
         contentPane.background = Color(44, 62, 80)
 
         val resultPanel = JPanel(BorderLayout()).apply {
@@ -63,12 +77,13 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
             val scrollPane = JScrollPane(resultTable).apply {
                 horizontalScrollBarPolicy = JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
                 verticalScrollBarPolicy = JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED
-                preferredSize = Dimension(1050, 250)
+                preferredSize = Dimension(1150, 300) // ✅ Ajustement de la largeur du tableau
             }
             add(scrollPane, BorderLayout.CENTER)
         }
 
-        val columnWidths = intArrayOf(80, 120, 300, 100, 100, 450)
+        // ✅ Ajustement des largeurs des colonnes
+        val columnWidths = intArrayOf(100, 150, 350, 120, 120, 450)
         for (i in columnWidths.indices) {
             resultTable.columnModel.getColumn(i).preferredWidth = columnWidths[i]
         }
@@ -107,8 +122,9 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         val buttonPanel = JPanel().apply {
             background = Color(52, 73, 94)
             add(searchButton)
+            add(primarySourceButton)
+            add(secondarySourceButton)
         }
-        searchButton.addActionListener(this)
 
         val controlPanel = JPanel(BorderLayout()).apply {
             add(searchPanel, BorderLayout.CENTER)
@@ -154,10 +170,16 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         val hasAirPump = airPumpCheckBox.isSelected
         val hasFoodShop = foodShopCheckBox.isSelected
 
-        ctrl.updateModelForCity(city, selectedFuel, hasToilets, hasAirPump, hasFoodShop)
+        when (e?.source) {
+            searchButton, primarySourceButton -> {
+                ctrl.updateModelForCityWithSource(city, true, selectedFuel, hasToilets, hasAirPump, hasFoodShop)
+            }
+            secondarySourceButton -> {
+                ctrl.updateModelForCityWithSource(city, false, selectedFuel, hasToilets, hasAirPump, hasFoodShop)
+            }
+        }
     }
 
-    /** ✅ Correction : Ajout de MultiLineTableCellRenderer directement ici */
     class MultiLineTableCellRenderer : JTextArea(), TableCellRenderer {
         init {
             lineWrap = true
@@ -166,18 +188,15 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         }
 
         override fun getTableCellRendererComponent(
-                table: JTable, value: Any?, isSelected: Boolean,
-                hasFocus: Boolean, row: Int, column: Int
+            table: JTable, value: Any?, isSelected: Boolean,
+            hasFocus: Boolean, row: Int, column: Int
         ): Component {
             text = value?.toString() ?: ""
-            if (isSelected) {
-                background = table.selectionBackground
-                foreground = table.selectionForeground
-            } else {
-                background = table.background
-                foreground = table.foreground
-            }
+            background = if (isSelected) table.selectionBackground else table.background
+            foreground = if (isSelected) table.selectionForeground else table.foreground
             return this
         }
     }
 }
+
+
