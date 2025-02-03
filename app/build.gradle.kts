@@ -29,6 +29,21 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel-coroutines:2.3.1")
     implementation("com.google.code.gson:gson:2.11.0")
 
+    val javaFxVersion = "23"
+    val osName = System.getProperty("os.name").lowercase()
+    val platform = when {
+        osName.contains("win") -> "win"
+        osName.contains("mac") -> "mac"
+        else -> "linux"
+    }
+
+    implementation("org.openjfx:javafx-base:$javaFxVersion:$platform")
+    implementation("org.openjfx:javafx-graphics:$javaFxVersion:$platform")
+    implementation("org.openjfx:javafx-controls:$javaFxVersion:$platform")
+    implementation("org.openjfx:javafx-swing:$javaFxVersion:$platform")
+    implementation("org.openjfx:javafx-web:$javaFxVersion:$platform")
+    implementation("org.openjfx:javafx-media:$javaFxVersion:$platform")
+
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.0")
     // Use the Kotlin JUnit 5 integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
@@ -57,4 +72,11 @@ application {
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+tasks.withType<JavaExec> {
+    jvmArgs = listOf(
+        "--module-path", System.getProperty("java.home") + "/lib",
+        "--add-modules", "javafx.controls,javafx.fxml,javafx.web,javafx.media"
+    )
 }

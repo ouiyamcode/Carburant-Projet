@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte des Stations</title>
+
+    <!-- ✅ Inclure Mapbox -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet"/>
+
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; }
+        #map { width: 100%; height: 100vh; }
+    </style>
+</head>
+<body>
+
+<!-- 📌 Conteneur de la carte -->
+<div id="map"></div>
+
+<script>
+    // ✅ Remplace avec TON token Mapbox
+    mapboxgl.accessToken = 'pk.eyJ1Ijoib3VpeWFtY29kZSIsImEiOiJjbTZwZ2xleHMxNTVoMm9zOGtrdnBweXE3In0.FPIgcpKFVZhVv14g23OlMA';
+
+    // ✅ Initialisation de la carte Mapbox
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [2.3522, 48.8566], // 📍 Paris par défaut
+        zoom: 12
+    });
+
+    // ✅ Fonction pour ajouter des marqueurs des stations
+    function addStationMarker(lng, lat, info) {
+        new mapboxgl.Marker()
+            .setLngLat([lng, lat])
+            .setPopup(new mapboxgl.Popup().setText(info))
+            .addTo(map);
+    }
+
+    // ✅ Fonction appelée par JavaFX pour charger les stations
+    window.loadStations = function (stations) {
+        console.log("📌 Chargement des stations :", stations);
+        stations.forEach(station => {
+            if (station.longitude !== "0.0" && station.latitude !== "0.0") {
+                addStationMarker(station.longitude, station.latitude, `${station.ville} - ${station.adresse}`);
+            }
+        });
+    };
+
+    // ✅ Charger les stations passées via l'URL (quand ouvert dans un navigateur)
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const stationsData = urlParams.get('stations');
+
+        if (stationsData) {
+            const stations = JSON.parse(decodeURIComponent(stationsData));
+            console.log("📌 Stations chargées :", stations);
+            window.loadStations(stations);
+        }
+    };
+</script>
+
+</body>
+</html>
+
+
