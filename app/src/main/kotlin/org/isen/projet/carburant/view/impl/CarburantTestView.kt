@@ -92,6 +92,11 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
             add(scrollPane, BorderLayout.CENTER)
         }
 
+        val columnWidths = intArrayOf(100, 150, 350, 120, 120, 450)
+        for (i in columnWidths.indices) {
+            resultTable.columnModel.getColumn(i).preferredWidth = columnWidths[i]
+        }
+
         val searchPanel = JPanel(GridBagLayout()).apply {
             border = EmptyBorder(10, 10, 10, 10)
             background = Color(52, 73, 94)
