@@ -7,6 +7,8 @@ import com.github.kittinunf.result.Result
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.*
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
 import java.net.URLEncoder
@@ -18,6 +20,7 @@ class CarburantModel {
     private val dataSourceXml = SourceXml()
     private val cacheGeocoding = mutableMapOf<String, Pair<String, String>>() // Cache pour éviter trop de requêtes Nominatim
     private val objectMapper = jacksonObjectMapper() // ✅ Utilisation de Jackson pour parser JSON
+    private val logger: Logger = LogManager.getLogger(CarburantModel::class.java)
 
     var stations: List<Station> by Delegates.observable(emptyList()) { property, oldValue, newValue ->
         pcs.firePropertyChange(property.name, oldValue, newValue)
@@ -45,7 +48,7 @@ class CarburantModel {
     ) {
         val dataSource = if (useJsonSource) dataSourceJson else dataSourceXml
         val sourceName = if (useJsonSource) "📡 Source Principale (JSON)" else "📡 Source Secondaire (XML)"
-        println("$sourceName : Recherche en cours pour la ville : $city...")
+        logger.info("$sourceName : Recherche en cours pour la ville : $city...")
 
         GlobalScope.launch(Dispatchers.IO) {
             val stations = dataSource.fetchDataForCity(city, fuelType, hasToilets, hasAirPump, hasFoodShop)
@@ -61,7 +64,7 @@ class CarburantModel {
 
             withContext(Dispatchers.Default) {
                 updateStations(enrichedStations)
-                println("✅ Modèle mis à jour avec ${enrichedStations.size} stations pour $city depuis $sourceName !")
+                logger.info("✅ Modèle mis à jour avec ${enrichedStations.size} stations pour $city depuis $sourceName !")
             }
         }
     }
@@ -98,23 +101,21 @@ class CarburantModel {
                         // 📌 Stockage en cache pour éviter les requêtes multiples
                         cacheGeocoding[fullAddress] = Pair(lat, lon)
 
-                        println("📍 Géocodage réussi: $fullAddress -> ($lat, $lon)")
+                        logger.info("📍 Géocodage réussi: $fullAddress -> ($lat, $lon)")
                         station.copy(latitude = lat, longitude = lon)
                     } else {
-                        println("❌ Aucun résultat pour $fullAddress")
+                        logger.warn("❌ Aucun résultat pour $fullAddress")
                         null
                     }
                 }
                 is Result.Failure -> {
-                    println("❌ Erreur HTTP lors de la requête Nominatim: ${result.error.message}")
+                    logger.error("❌ Erreur HTTP lors de la requête Nominatim: ${result.error.message}")
                     null
                 }
             }
         } catch (e: Exception) {
-            println("❌ Erreur lors de la requête Nominatim: ${e.message}")
+            logger.error("❌ Erreur lors de la requête Nominatim: ${e.message}")
             null
         }
     }
 }
-
-

@@ -4,6 +4,8 @@ import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import org.isen.projet.carburant.data.IDataSource
 import org.isen.projet.carburant.model.Station
 import java.net.URLEncoder
@@ -12,6 +14,7 @@ import java.text.Normalizer
 class SourceJson : IDataSource {
 
     private val baseUrl = "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/prix-des-carburants-j-1/records"
+    private val logger: Logger = LogManager.getLogger(SourceJson::class.java)
 
     override fun fetchData(): String {
         return fetchDataFromUrl("$baseUrl?limit=100")
@@ -51,10 +54,10 @@ class SourceJson : IDataSource {
         when (result) {
             is Result.Success -> {
                 jsonData = result.get()
-                println("📡 JSON brut reçu : ${jsonData.take(500)}") // Vérification rapide
+                logger.info("📡 JSON brut reçu : ${jsonData.take(500)}") // Vérification rapide
             }
             is Result.Failure -> {
-                println("❌ Erreur HTTP ${response.statusCode}: ${result.error.message}")
+                logger.error("❌ Erreur HTTP ${response.statusCode}: ${result.error.message}")
             }
         }
 
@@ -62,7 +65,7 @@ class SourceJson : IDataSource {
     }
 
     override fun parseData(data: String): List<Station> {
-        println("📡 Parsing des données JSON...")
+        logger.info("📡 Parsing des données JSON...")
 
         val stationsMap = mutableMapOf<String, Station>()
         val mapper = jacksonObjectMapper()
@@ -112,16 +115,16 @@ class SourceJson : IDataSource {
                         countValidGPS++
                     } else {
                         countMissingGPS++
-                        println("⚠️ Station ID=$id sans GPS: $ville, $adresse")
+                        logger.warn("⚠️ Station ID=$id sans GPS: $ville, $adresse")
                     }
                 }
             }
 
         } catch (e: Exception) {
-            println("❌ Erreur lors du parsing JSON: ${e.message}")
+            logger.error("❌ Erreur lors du parsing JSON: ${e.message}")
         }
 
-        println("📊 Résumé: ${countValidGPS} stations avec GPS, ${countMissingGPS} sans GPS.")
+        logger.info("📊 Résumé: ${countValidGPS} stations avec GPS, ${countMissingGPS} sans GPS.")
 
         return stationsMap.values.toList()
     }
@@ -132,12 +135,3 @@ class SourceJson : IDataSource {
             .uppercase()
     }
 }
-
-
-
-
-
-
-
-
-

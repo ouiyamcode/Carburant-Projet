@@ -14,64 +14,15 @@
             <body>
                 <div id='map'></div>
                 <script>
-                    var map = L.map('map').setView([43.29864454236285, 5.569169636630821], 12);
+                    var map = L.map('map').setView([43.293, 5.593], 12);
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; OpenStreetMap contributors'
                     }).addTo(map);
 
-                    var marker = L.marker([43.29864454236285, 5.569169636630821])
+                    var marker = L.marker([43.293, 5.593])
     .addTo(map)
-    .bindPopup("<b>AUBAGNE</b><br>AV. ROGER SALENGRO<br>Code Postal: 13400<br>Gazole : 0.001664 €<br>SP98 : 0.001871 €<br>E10 : 0.001761 €<br>E85 : 8.29E-4 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.2891, 5.56561])
-    .addTo(map)
-    .bindPopup("<b>AUBAGNE</b><br>1000 Route de Gemenos<br>Code Postal: 13400<br>SP98 : 0.001869 €<br>E10 : 0.001759 €<br>E85 : 8.09E-4 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.2840939903, 5.54404392489])
-    .addTo(map)
-    .bindPopup("<b>AUBAGNE</b><br>RN 8 Quartier le Charrel<br>Code Postal: 13400<br>Gazole : 0.001759 €<br>SP98 : 0.001859 €<br>E10 : 0.001769 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.2869264, 5.6018944])
-    .addTo(map)
-    .bindPopup("<b>AUBAGNE</b><br>298 Avenue des Paluds<br>Code Postal: 13400<br>Gazole : 0.001967 €<br>SP98 : 0.00199 €<br>E10 : 0.001914 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.2889489536, 5.54111135391])
-    .addTo(map)
-    .bindPopup("<b>AUBAGNE</b><br>CAMP MAJOR<br>Code Postal: 13400<br>Gazole : 0.001907 €<br>SP98 : 0.00199 €<br>E10 : 0.001887 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.29401, 5.57149])
-    .addTo(map)
-    .bindPopup("<b>AUBAGNE</b><br>Route de gemenos<br>Code Postal: 13783<br>Gazole : 0.001745 €<br>SP98 : 0.001799 €<br>GPLc : 9.55E-4 €<br>E10 : 0.00172 €<br>E85 : 9.59E-4 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.29432, 5.55969])
-    .addTo(map)
-    .bindPopup("<b>AUBAGNE</b><br>550 Avenue Antide Boyer<br>Code Postal: 13400<br>Gazole : 0.001739 €<br>SP98 : 0.001889 €<br>E10 : 0.0018089999999999998 €<br>E85 : 9.99E-4 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([0.0, 0.0])
-    .addTo(map)
-    .bindPopup("<b>AUBAGNE</b><br>1509 RN8<br>Code Postal: 13400<br>Gazole : 0.001629 €<br>SP98 : 0.001829 €<br>E10 : 0.0017490000000000001 €");
+    .bindPopup("<b>AUBAGNE</b><br>Route de gemenos<br>Code Postal: 13783<br>Gazole : 1.683 €<br>E85 : 0.758 €<br>GPLc : 0.939 €<br>E10 : 1.736 €<br>SP98 : 1.838 €");
 
 marker.on('click', function (e) {
     this.openPopup();

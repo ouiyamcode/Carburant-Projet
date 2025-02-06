@@ -2,11 +2,12 @@ package org.isen.projet.carburant.data.impl
 
 import com.github.kittinunf.fuel.httpDownload
 import com.github.kittinunf.result.Result
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import org.isen.projet.carburant.data.IDataSource
 import org.isen.projet.carburant.model.Station
 import java.io.File
 import java.io.StringReader
-import java.net.URLEncoder
 import java.text.Normalizer
 import java.util.zip.ZipFile
 import javax.xml.parsers.DocumentBuilderFactory
@@ -18,18 +19,19 @@ class SourceXml : IDataSource {
     private val dataDirectory = "data"
     private val zipFilePath = "$dataDirectory/prix-carburants.zip"
     private val extractedXmlPath = "$dataDirectory/PrixCarburants_instantane.xml"
+    private val logger: Logger = LogManager.getLogger(SourceXml::class.java)
 
     override fun fetchData(): String {
         val dataDir = File(dataDirectory)
         if (!dataDir.exists()) dataDir.mkdirs()
 
         if (!downloadFile(zipUrl, zipFilePath)) {
-            println("❌ Erreur : Impossible de télécharger le fichier ZIP.")
+            logger.error("❌ Erreur : Impossible de télécharger le fichier ZIP.")
             return ""
         }
 
         if (!extractZipFile(zipFilePath, extractedXmlPath)) {
-            println("❌ Erreur : Impossible d'extraire le fichier XML.")
+            logger.error("❌ Erreur : Impossible d'extraire le fichier XML.")
             return ""
         }
 
@@ -37,7 +39,7 @@ class SourceXml : IDataSource {
         return if (xmlFile.exists() && xmlFile.length() > 0) {
             xmlFile.readText()
         } else {
-            println("❌ Erreur : Le fichier XML extrait est vide.")
+            logger.error("❌ Erreur : Le fichier XML extrait est vide.")
             ""
         }
     }
@@ -65,11 +67,11 @@ class SourceXml : IDataSource {
 
     override fun parseData(data: String): List<Station> {
         if (data.isEmpty()) {
-            println("❌ Erreur : Données XML vides.")
+            logger.error("❌ Erreur : Données XML vides.")
             return emptyList()
         }
 
-        println("📡 Parsing des données XML...")
+        logger.info("📡 Parsing des données XML...")
 
         val stationsList = mutableListOf<Station>()
 
@@ -106,10 +108,10 @@ class SourceXml : IDataSource {
             }
 
         } catch (e: Exception) {
-            println("❌ Erreur lors du parsing XML: ${e.message}")
+            logger.error("❌ Erreur lors du parsing XML: ${e.message}")
         }
 
-        println("✅ ${stationsList.size} stations extraites avec succès.")
+        logger.info("✅ ${stationsList.size} stations extraites avec succès.")
         return stationsList
     }
 
@@ -133,16 +135,16 @@ class SourceXml : IDataSource {
     }
 
     private fun downloadFile(url: String, destinationPath: String): Boolean {
-        println("📡 Téléchargement du fichier ZIP...")
+        logger.info("📡 Téléchargement du fichier ZIP...")
 
         val (_, _, result) = url.httpDownload().fileDestination { _, _ -> File(destinationPath) }.response()
         return when (result) {
             is Result.Success -> {
-                println("✅ Fichier ZIP téléchargé avec succès.")
+                logger.info("✅ Fichier ZIP téléchargé avec succès.")
                 true
             }
             is Result.Failure -> {
-                println("❌ Erreur lors du téléchargement du ZIP : ${result.error.message}")
+                logger.error("❌ Erreur lors du téléchargement du ZIP : ${result.error.message}")
                 false
             }
         }
@@ -156,14 +158,14 @@ class SourceXml : IDataSource {
                 zipFile.getInputStream(entry).use { input ->
                     File(outputFilePath).outputStream().use { output -> input.copyTo(output) }
                 }
-                println("📂 Fichier XML extrait avec succès.")
+                logger.info("📂 Fichier XML extrait avec succès.")
                 true
             } else {
-                println("❌ Aucun fichier XML trouvé dans le ZIP.")
+                logger.error("❌ Aucun fichier XML trouvé dans le ZIP.")
                 false
             }
         } catch (e: Exception) {
-            println("❌ Erreur lors de l'extraction du ZIP : ${e.message}")
+            logger.error("❌ Erreur lors de l'extraction du ZIP : ${e.message}")
             false
         }
     }
@@ -174,9 +176,3 @@ class SourceXml : IDataSource {
             .uppercase()
     }
 }
-
-
-
-
-
-
