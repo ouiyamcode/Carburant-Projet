@@ -21,6 +21,7 @@ class CarburantModel {
 
     var stations: List<Station> by Delegates.observable(emptyList()) { property, oldValue, newValue ->
         pcs.firePropertyChange(property.name, oldValue, newValue)
+        LeafletService.generateMapHtml(newValue)
     }
 
     fun updateStations(newStations: List<Station>) {

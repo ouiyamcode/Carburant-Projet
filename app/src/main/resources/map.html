@@ -1,68 +1,68 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carte des Stations</title>
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset='utf-8' />
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Carte des stations-service</title>
+                <link rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' />
+                <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'></script>
+                <style>
+                    body { margin: 0; padding: 0; }
+                    #map { width: 100vw; height: 100vh; }
+                </style>
+            </head>
+            <body>
+                <div id='map'></div>
+                <script>
+                    var map = L.map('map').setView([43.087908903878194, 5.881449241130231], 12);
 
-    <!-- ✅ Inclure Mapbox -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet"/>
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
 
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; }
-        #map { width: 100%; height: 100vh; }
-    </style>
-</head>
-<body>
+                    var marker = L.marker([43.087908903878194, 5.881449241130231])
+    .addTo(map)
+    .bindPopup("<b>LA SEYNE-SUR-MER</b><br>Avenue Salvador Allende<br>Code Postal: 83500<br>Gazole : 0.001539 €<br>SP98 : 0.001702 €<br>E10 : 0.001635 €<br>E85 : 7.59E-4 €");
 
-<!-- 📌 Conteneur de la carte -->
-<div id="map"></div>
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.088878949999994, 5.8888192])
+    .addTo(map)
+    .bindPopup("<b>LA SEYNE-SUR-MER</b><br>Chemin de l'evescat aux sablettes<br>Code Postal: 83500<br>Gazole : 0.001545 €<br>SP95 : 0.0017259999999999999 €<br>SP98 : 0.001746 €<br>E10 : 0.001647 €");
 
-<script>
-    // ✅ Remplace avec TON token Mapbox
-    mapboxgl.accessToken = 'pk.eyJ1Ijoib3VpeWFtY29kZSIsImEiOiJjbTZwZ2xleHMxNTVoMm9zOGtrdnBweXE3In0.FPIgcpKFVZhVv14g23OlMA';
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.1079905, 5.8677297932330825])
+    .addTo(map)
+    .bindPopup("<b>LA SEYNE-SUR-MER</b><br>278 BD MARECHAL JUIN<br>Code Postal: 83500<br>Gazole : 0.0015589999999999998 €<br>E10 : 0.001664 €<br>E85 : 7.69E-4 €");
 
-    // ✅ Initialisation de la carte Mapbox
-    const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [2.3522, 48.8566], // 📍 Paris par défaut
-        zoom: 12
-    });
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.1077438, 5.877563])
+    .addTo(map)
+    .bindPopup("<b>LA SEYNE-SUR-MER</b><br>Rond-Point du 8 Mai 1945<br>Code Postal: 83500<br>E85 : 9.49E-4 €");
 
-    // ✅ Fonction pour ajouter des marqueurs des stations
-    function addStationMarker(lng, lat, info) {
-        new mapboxgl.Marker()
-            .setLngLat([lng, lat])
-            .setPopup(new mapboxgl.Popup().setText(info))
-            .addTo(map);
-    }
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>LA SEYNE-SUR-MER</b><br>Quartier Lery<br>Code Postal: 83500<br>Gazole : 0.001588 €<br>SP98 : 0.001768 €<br>E10 : 0.001668 €");
 
-    // ✅ Fonction appelée par JavaFX pour charger les stations
-    window.loadStations = function (stations) {
-        console.log("📌 Chargement des stations :", stations);
-        stations.forEach(station => {
-            if (station.longitude !== "0.0" && station.latitude !== "0.0") {
-                addStationMarker(station.longitude, station.latitude, `${station.ville} - ${station.adresse}`);
-            }
-        });
-    };
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.1117689, 5.8588462])
+    .addTo(map)
+    .bindPopup("<b>LA SEYNE-SUR-MER</b><br>780,Boulevard de l'Europe<br>Code Postal: 83500<br>Gazole : 0.001944 €");
 
-    // ✅ Charger les stations passées via l'URL (quand ouvert dans un navigateur)
-    window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const stationsData = urlParams.get('stations');
+marker.on('click', function (e) {
+    this.openPopup();
+});
 
-        if (stationsData) {
-            const stations = JSON.parse(decodeURIComponent(stationsData));
-            console.log("📌 Stations chargées :", stations);
-            window.loadStations(stations);
-        }
-    };
-</script>
-
-</body>
-</html>
-
-
+                </script>
+            </body>
+            </html>

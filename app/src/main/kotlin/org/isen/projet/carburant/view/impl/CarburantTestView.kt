@@ -7,10 +7,6 @@ import java.awt.*
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.beans.PropertyChangeEvent
-import java.io.File
-import java.net.URI
-import java.net.URLDecoder
-import java.nio.file.Paths
 import javax.swing.*
 import javax.swing.border.EmptyBorder
 import javax.swing.table.DefaultTableModel
@@ -55,7 +51,9 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         foreground = Color.WHITE
         font = Font("Arial", Font.BOLD, 14)
         isFocusPainted = false
-        addActionListener { openMapInBrowser() }
+        addActionListener {
+            CarburantMapView(ctrl).isVisible = true
+        }
     }
 
     private val tableModel = DefaultTableModel(arrayOf("ID", "Ville", "Adresse", "Latitude", "Longitude", "Prix"), 0)
@@ -92,11 +90,6 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
                 preferredSize = Dimension(1150, 300)
             }
             add(scrollPane, BorderLayout.CENTER)
-        }
-
-        val columnWidths = intArrayOf(100, 150, 350, 120, 120, 450)
-        for (i in columnWidths.indices) {
-            resultTable.columnModel.getColumn(i).preferredWidth = columnWidths[i]
         }
 
         val searchPanel = JPanel(GridBagLayout()).apply {
@@ -192,23 +185,6 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         }
     }
 
-
-    private fun openMapInBrowser() {
-        val mapFile = File("app/build/resources/main/map.html")
-
-        if (mapFile.exists()) {
-            val mapURI = mapFile.toURI()
-            try {
-                Desktop.getDesktop().browse(mapURI)
-                println("🌍 Carte ouverte dans le navigateur : $mapURI")
-            } catch (e: Exception) {
-                println("❌ Erreur lors de l'ouverture du fichier map.html : ${e.message}")
-            }
-        } else {
-            println("❌ Erreur : Le fichier map.html n'existe pas à l'emplacement attendu.")
-        }
-    }
-
     class MultiLineTableCellRenderer : JTextArea(), TableCellRenderer {
         init {
             lineWrap = true
@@ -227,5 +203,3 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         }
     }
 }
-
-

@@ -1,50 +1,42 @@
 package org.isen.projet.carburant.view.impl
 
-import javafx.embed.swing.JFXPanel
 import javafx.application.Platform
+import javafx.embed.swing.JFXPanel
 import javafx.scene.Scene
 import javafx.scene.web.WebEngine
 import javafx.scene.web.WebView
 import org.isen.projet.carburant.ctrl.CarburantController
 import org.isen.projet.carburant.model.Station
 import org.isen.projet.carburant.view.ICarburantView
-import java.awt.BorderLayout
-import java.awt.Desktop
-import java.beans.PropertyChangeEvent
-import java.net.URI
-import javax.swing.JButton
+import java.io.File
 import javax.swing.JFrame
-import javax.swing.JPanel
 import javax.swing.WindowConstants
 
 class CarburantMapView(private val ctrl: CarburantController) : JFrame("🗺️ Carte des Stations"), ICarburantView {
 
-    private lateinit var webEngine: WebEngine
     private val jfxPanel = JFXPanel()
-    private val openBrowserButton = JButton("🌍 Ouvrir dans le navigateur").apply {
-        addActionListener { openMapInBrowser() }
-    }
+    private lateinit var webEngine: WebEngine
 
     init {
-        preferredSize = java.awt.Dimension(800, 600)
-        defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-        contentPane.layout = BorderLayout()
-        contentPane.add(jfxPanel, BorderLayout.CENTER)
-
-        val buttonPanel = JPanel()
-        buttonPanel.add(openBrowserButton)
-        contentPane.add(buttonPanel, BorderLayout.SOUTH)
+        setSize(1200, 600)
+        defaultCloseOperation = WindowConstants.DISPOSE_ON_CLOSE
+        contentPane.add(jfxPanel)
 
         Platform.runLater {
             val webView = WebView()
             webEngine = webView.engine
-            val url = "file:///${System.getProperty("user.dir")}/src/main/resources/map.html" // ✅ Chargement local
-            webEngine.load(url)
+            val mapFile = File("app/src/main/resources/map.html")
+
+            if (mapFile.exists()) {
+                webEngine.load(mapFile.toURI().toString())
+            } else {
+                webEngine.loadContent("<html><body><h2>Carte non disponible</h2></body></html>")
+            }
+
             jfxPanel.scene = Scene(webView)
         }
 
         isVisible = true
-        pack()
     }
 
     override fun display() {
@@ -55,38 +47,21 @@ class CarburantMapView(private val ctrl: CarburantController) : JFrame("🗺️ 
         isVisible = false
     }
 
-    /**
-     * 📌 **Ouvre la carte dans le navigateur**
-     */
-    private fun openMapInBrowser() {
-        val mapPath = "file:///home/ouiyam/TP/KOTLIN/Projet/app/build/resources/main/map.html"
-        if (Desktop.isDesktopSupported()) {
-            Desktop.getDesktop().browse(URI(mapPath))
-        } else {
-            println("❌ Desktop API non supportée")
+    override fun propertyChange(evt: java.beans.PropertyChangeEvent) {
+        if (evt.propertyName == "stations") {
+            val stations = evt.newValue as? List<Station> ?: return
+            Platform.runLater {
+                updateStationsOnMap(stations)
+            }
         }
     }
 
-    override fun propertyChange(evt: PropertyChangeEvent) {
-        if (evt.propertyName == "stations") {
-            val stations = (evt.newValue as? List<*>)?.filterIsInstance<Station>() ?: return
-
-            val jsStations = stations.map {
-                """{ "id": "${it.id}", "latitude": ${it.latitude}, "longitude": ${it.longitude}, "ville": "${it.ville}", "adresse": "${it.adresse}" }"""
-            }.joinToString(",", "[", "]")
-
-            Platform.runLater {
-                println("📡 Envoi des stations à la carte : $jsStations") // Debug
-                webEngine.executeScript("loadStations($jsStations)")
-            }
-
-            try {
-                val url = URI("file:///home/ouiyam/TP/KOTLIN/Projet/app/build/resources/main/map.html?stations=$jsStations")
-                Desktop.getDesktop().browse(url)
-            } catch (e: Exception) {
-                println("❌ Erreur lors de l'ouverture de la carte : ${e.message}")
-            }
+    private fun updateStationsOnMap(stations: List<Station>) {
+        val jsonStations = stations.joinToString(",") { station ->
+            """{"latitude": ${station.latitude}, "longitude": ${station.longitude}, "ville": "${station.ville}", "adresse": "${station.adresse}", "codePostal": "${station.codePostal}", "prixCarburants": ${station.prixCarburants.map { "\"${it.key}\": \"${it.value}\"" }.joinToString(", ", "{", "}")}}"""
         }
+
+        val script = """updateStations([$jsonStations]);"""
+        webEngine.executeScript(script) // Envoie les nouvelles stations au script JS
     }
 }
-
