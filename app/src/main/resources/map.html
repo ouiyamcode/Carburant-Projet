@@ -14,15 +14,295 @@
             <body>
                 <div id='map'></div>
                 <script>
-                    var map = L.map('map').setView([43.293, 5.593], 12);
+                    var map = L.map('map').setView([43.283843990121, 5.5440513689708], 12);
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; OpenStreetMap contributors'
                     }).addTo(map);
 
-                    var marker = L.marker([43.293, 5.593])
+                    var marker = L.marker([43.283843990121, 5.5440513689708])
+    .addTo(map)
+    .bindPopup("<b>Aubagne</b><br>1509 RN8<br>Code Postal: 13400<br>Gazole : 1.679 €<br>E10 : 1.739 €<br>SP98 : 1.839 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.297, 5.586])
+    .addTo(map)
+    .bindPopup("<b>AUBAGNE</b><br>1000 Route de Gemenos<br>Code Postal: 13400<br>Gazole : 1.779 €<br>E85 : 0.804 €<br>E10 : 1.832 €<br>SP98 : 1.942 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.295, 5.56])
+    .addTo(map)
+    .bindPopup("<b>Aubagne</b><br>550 Avenue Antide Boyer<br>Code Postal: 13400<br>Gazole : 1.683 €<br>E85 : 0.838 €<br>E10 : 1.736 €<br>SP98 : 1.838 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.284, 5.602])
+    .addTo(map)
+    .bindPopup("<b>AUBAGNE</b><br>298 Avenue des Paluds<br>Code Postal: 13400<br>Gazole : 1.779 €<br>E10 : 1.829 €<br>SP98 : 1.939 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.30053, 5.56976])
+    .addTo(map)
+    .bindPopup("<b>AUBAGNE</b><br>AV. ROGER SALENGRO<br>Code Postal: 13400<br>Gazole : 1.766 €<br>E85 : 0.819 €<br>E10 : 1.832 €<br>SP98 : 1.942 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.289, 5.541])
+    .addTo(map)
+    .bindPopup("<b>AUBAGNE</b><br>CAMP MAJOR<br>Code Postal: 13400<br>Gazole : 1.779 €<br>E10 : 1.831 €<br>SP98 : 1.941 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.293, 5.593])
     .addTo(map)
     .bindPopup("<b>AUBAGNE</b><br>Route de gemenos<br>Code Postal: 13783<br>Gazole : 1.683 €<br>E85 : 0.758 €<br>GPLc : 0.939 €<br>E10 : 1.736 €<br>SP98 : 1.838 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.217, 5.546])
+    .addTo(map)
+    .bindPopup("<b>CASSIS</b><br>QUARTIER STE CROIX<br>Code Postal: 13260<br>Gazole : 1.773 €<br>E85 : 0.799 €<br>E10 : 1.834 €<br>SP98 : 1.944 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.098, 5.826])
+    .addTo(map)
+    .bindPopup("<b>SIX-FOURS-LES-PLAGES</b><br>60 traverse Font de Fillol<br>Code Postal: 83140<br>Gazole : 1.663 €<br>SP95 : 1.799 €<br>E10 : 1.731 €<br>SP98 : 1.831 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.11, 5.813])
+    .addTo(map)
+    .bindPopup("<b>Six-Fours-les-Plages</b><br>206 PLAGE DE BONNEGRACE - RD559<br>Code Postal: 83140<br>Gazole : 1.661 €<br>E85 : 0.774 €<br>E10 : 1.733 €<br>SP98 : 1.831 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.089, 5.852])
+    .addTo(map)
+    .bindPopup("<b>Six-Fours-les-Plages</b><br>RD 16 - 333 ROUTE DES SABLETTES<br>Code Postal: 83140<br>Gazole : 1.752 €<br>E85 : 0.783 €<br>E10 : 1.823 €<br>SP98 : 1.933 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.103, 5.821])
+    .addTo(map)
+    .bindPopup("<b>SIX-FOURS-LES-PLAGES</b><br>Avenue de la Mer<br>Code Postal: 83140<br>Gazole : 1.663 €<br>SP95 : 1.799 €<br>E85 : 0.758 €<br>E10 : 1.731 €<br>SP98 : 1.831 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.092, 5.844])
+    .addTo(map)
+    .bindPopup("<b>Six-Fours-les-Plages</b><br>TRAVERSE DE BAYLE<br>Code Postal: 83140<br>Gazole : 1.663 €<br>E85 : 0.758 €<br>E10 : 1.731 €<br>SP98 : 1.831 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.12237, 5.84962])
+    .addTo(map)
+    .bindPopup("<b>OLLIOULES</b><br>715 RTE DE LA SEYNE<br>Code Postal: 83190<br>Gazole : 1.659 €<br>E10 : 1.729 €<br>SP98 : 1.837 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.125, 5.876])
+    .addTo(map)
+    .bindPopup("<b>OLLIOULES</b><br>55 Chemin de la Bouy�re<br>Code Postal: 83190<br>Gazole : 1.683 €<br>SP95 : 1.819 €<br>E10 : 1.750 €<br>SP98 : 1.868 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.133, 5.846])
+    .addTo(map)
+    .bindPopup("<b>Ollioules</b><br>427 Avenue de la R�sistance<br>Code Postal: 83190<br>Gazole : 1.699 €<br>SP95 : 1.779 €<br>SP98 : 1.939 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.124, 5.823])
+    .addTo(map)
+    .bindPopup("<b>OLLIOULES</b><br>LE PETIT PLAN<br>Code Postal: 83190<br>Gazole : 1.659 €<br>E85 : 0.758 €<br>E10 : 1.729 €<br>SP98 : 1.837 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.08509, 5.88123])
+    .addTo(map)
+    .bindPopup("<b>La Seyne-sur-Mer</b><br>Avenue Salvador Allende<br>Code Postal: 83500<br>Gazole : 1.667 €<br>E85 : 0.759 €<br>E10 : 1.742 €<br>SP98 : 1.836 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.108, 5.868])
+    .addTo(map)
+    .bindPopup("<b>La Seyne-sur-Mer</b><br>278 BD MARECHAL JUIN<br>Code Postal: 83500<br>Gazole : 1.664 €<br>E85 : 0.774 €<br>E10 : 1.729 €<br>SP98 : 1.831 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.11, 5.86])
+    .addTo(map)
+    .bindPopup("<b>LA SEYNE-SUR-MER</b><br>Quartier Lery<br>Code Postal: 83500<br>Gazole : 1.665 €<br>E10 : 1.731 €<br>SP98 : 1.832 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.108, 5.877])
+    .addTo(map)
+    .bindPopup("<b>LA SEYNE-SUR-MER</b><br>Rond-Point du 8 Mai 1945<br>Code Postal: 83500<br>Gazole : 1.766 €<br>E85 : 0.896 €<br>E10 : 1.828 €<br>SP98 : 1.926 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.113, 5.858])
+    .addTo(map)
+    .bindPopup("<b>LA SEYNE-SUR-MER</b><br>780,Boulevard de l'Europe<br>Code Postal: 83500<br>Gazole : 1.663 €<br>GPLc : 0.939 €<br>E10 : 1.729 €<br>SP98 : 1.831 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.083, 5.894])
+    .addTo(map)
+    .bindPopup("<b>La Seyne-sur-Mer</b><br>Chemin de l'evescat aux sablettes<br>Code Postal: 83500<br>Gazole : 1.665 €<br>SP95 : 1.820 €<br>E10 : 1.731 €<br>SP98 : 1.832 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.183229311568, 5.6951125902699005])
+    .addTo(map)
+    .bindPopup("<b>Saint-Cyr-sur-Mer</b><br>ZAC DES PRADEAUX<br>Code Postal: 83270<br>Gazole : 1.657 €<br>E10 : 1.732 €<br>SP98 : 1.829 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.181, 5.69751])
+    .addTo(map)
+    .bindPopup("<b>Saint-Cyr-sur-Mer</b><br>QUARTIER LA BANETTE RN.559<br>Code Postal: 83270<br>Gazole : 1.830 €<br>E10 : 1.890 €<br>SP98 : 1.990 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.1809050761, 5.71030196549])
+    .addTo(map)
+    .bindPopup("<b>SAINT-CYR-SUR-MER</b><br>ZAC des Pradeaux<br>Code Postal: 83270<br>");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.12753, 5.97764])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>283 Rue Henri Sainte-Claire Deville<br>Code Postal: 83100<br>Gazole : 1.682 €<br>SP95 : 1.812 €<br>E10 : 1.748 €<br>SP98 : 1.859 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.11874, 5.9794])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>2338 Avenue Joseph Gasquet<br>Code Postal: 83100<br>Gazole : 1.749 €<br>E10 : 1.829 €<br>SP98 : 1.929 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.1177114581, 5.94101238436])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>322 AV.LE BELLEGOU RODE<br>Code Postal: 83000<br>Gazole : 1.672 €<br>E85 : 0.779 €<br>GPLc : 0.999 €<br>E10 : 1.744 €<br>SP98 : 1.857 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.13945251, 5.88654834])
+    .addTo(map)
+    .bindPopup("<b>Toulon</b><br>620 Rue David<br>Code Postal: 83200<br>Gazole : 1.749 €<br>E10 : 1.829 €<br>SP98 : 1.929 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.11313, 5.93462])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>AV INFANTERIE DE MARINE<br>Code Postal: 83000<br>Gazole : 1.672 €<br>E10 : 1.744 €<br>SP98 : 1.857 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.128, 5.919])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>508 AVENUE FOCH<br>Code Postal: 83100<br>Gazole : 1.763 €<br>E85 : 0.789 €<br>E10 : 1.836 €<br>SP98 : 1.946 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.12367, 5.93697])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>160 BOULEVARD G.CLEMENCEAU<br>Code Postal: 83000<br>Gazole : 1.772 €<br>E85 : 0.789 €<br>GPLc : 1.019 €<br>E10 : 1.839 €<br>SP98 : 1.949 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.12814, 5.90563])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>95 Boulevard G�n�ral Brosset<br>Code Postal: 83200<br>Gazole : 1.729 €<br>SP95 : 1.869 €<br>SP98 : 1.969 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.190513098219, 5.6023208384662])
+    .addTo(map)
+    .bindPopup("<b>La Ciotat</b><br>QUARTIER PIGNET DU ROHAN ZAC DE LATTRE DE TASSIGNY<br>Code Postal: 13600<br>Gazole : 1.697 €<br>E85 : 0.758 €<br>E10 : 1.766 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.194, 5.671])
+    .addTo(map)
+    .bindPopup("<b>La Ciotat</b><br>A50 - AIRE DE LA BAIE DE LA CIOTAT (ex plaines baronnes) sens toulon -marseille<br>Code Postal: 13600<br>Gazole : 1.841 €<br>GPLc : 1.109 €<br>E10 : 1.883 €<br>SP98 : 2.007 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.18899, 5.63252])
+    .addTo(map)
+    .bindPopup("<b>LA CIOTAT</b><br>RD 559 AVENUE PAUL ROVARCH<br>Code Postal: 13600<br>Gazole : 1.662 €<br>E10 : 1.739 €<br>SP98 : 1.839 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.192, 5.666])
+    .addTo(map)
+    .bindPopup("<b>La Ciotat</b><br>A50 - Aire des freres lumieres (ex liouquet) - Sens Marseilles Toulon<br>Code Postal: 13600<br>Gazole : 1.841 €<br>GPLc : 1.109 €<br>E10 : 1.883 €<br>SP98 : 2.007 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.184, 5.61])
+    .addTo(map)
+    .bindPopup("<b>LA CIOTAT</b><br>Avenue Ernest Subilia<br>Code Postal: 13600<br>Gazole : 1.729 €<br>E85 : 0.859 €<br>E10 : 1.829 €<br>SP98 : 1.899 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.188, 5.602])
+    .addTo(map)
+    .bindPopup("<b>LA CIOTAT</b><br>chemin du puits de brunet<br>Code Postal: 13600<br>Gazole : 1.691 €<br>SP95 : 1.837 €<br>E10 : 1.759 €<br>SP98 : 1.881 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.193, 5.6])
+    .addTo(map)
+    .bindPopup("<b>LA CIOTAT</b><br>1045 AVENUE �MILE BODIN<br>Code Postal: 13600<br>Gazole : 1.729 €<br>E85 : 0.859 €<br>GPLc : 0.999 €<br>E10 : 1.829 €<br>SP98 : 1.899 €");
 
 marker.on('click', function (e) {
     this.openPopup();

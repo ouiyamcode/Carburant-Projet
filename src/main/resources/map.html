@@ -1,0 +1,374 @@
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset='utf-8' />
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Carte des stations-service</title>
+                <link rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' />
+                <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'></script>
+                <style>
+                    body { margin: 0; padding: 0; }
+                    #map { width: 100vw; height: 100vh; }
+                </style>
+            </head>
+            <body>
+                <div id='map'></div>
+                <script>
+                    var map = L.map('map').setView([0.0, 0.0], 12);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>508 AVENUE FOCH<br>Code Postal: 83100<br>Gazole : 0.001879 €<br>SP98 : 0.002036 €<br>E10 : 0.001926 €<br>E85 : 0.001119 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>2338 Avenue Joseph Gasquet<br>Code Postal: 83100<br>Gazole : 0.0019690000000000003 €<br>SP98 : 0.002149 €<br>E10 : 0.002049 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>620 Rue David<br>Code Postal: 83200<br>Gazole : 0.0019690000000000003 €<br>SP98 : 0.002149 €<br>E10 : 0.002049 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>160 BOULEVARD G.CLEMENCEAU<br>Code Postal: 83000<br>Gazole : 0.001879 €<br>SP98 : 0.00199 €<br>GPLc : 0.001034 €<br>E10 : 0.00199 €<br>E85 : 0.001119 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>AV INFANTERIE DE MARINE<br>Code Postal: 83000<br>Gazole : 0.0017909999999999998 €<br>SP98 : 0.0019790000000000003 €<br>E10 : 0.001906 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>322 AV.LE BELLEGOU RODE<br>Code Postal: 83000<br>Gazole : 0.001748 €<br>SP98 : 0.001951 €<br>GPLc : 9.69E-4 €<br>E10 : 0.0018640000000000002 €<br>E85 : 0.001119 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>12 Rond-Point Général Bonaparte<br>Code Postal: 83100<br>SP98 : 0.002099 €<br>E10 : 0.0019790000000000003 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>Boulevard Briand<br>Code Postal: 83200<br>Gazole : 0.001779 €<br>SP98 : 0.002009 €<br>E10 : 0.001929 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>283 Rue Henri Sainte-Claire Deville<br>Code Postal: 83100<br>Gazole : 0.002059 €<br>SP95 : 0.002029 €<br>SP98 : 0.002079 €<br>E10 : 0.001975 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>95 Boulevard Général Brosset<br>Code Postal: 83200<br>Gazole : 0.0019690000000000003 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>20 AVENUE MARCEL DELPRAT<br>Code Postal: 13013<br>SP98 : 0.001784 €<br>E10 : 0.001689 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>CHEMIN DU ROY D'ESPAGNE<br>Code Postal: 13009<br>Gazole : 0.001565 €<br>SP98 : 0.00175 €<br>E10 : 0.001645 €<br>E85 : 7.58E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>72 ROUTE D'ALLAUCH<br>Code Postal: 13011<br>Gazole : 0.001599 €<br>E10 : 0.001699 €<br>E85 : 7.58E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>AVENUE FREDERIC MISTRAL<br>Code Postal: 13013<br>Gazole : 0.001649 €<br>SP98 : 0.001794 €<br>GPLc : 9.39E-4 €<br>E10 : 0.001702 €<br>E85 : 7.830000000000001E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>1 chemin du chateau gombert<br>Code Postal: 13013<br>Gazole : 0.001609 €<br>SP98 : 0.0017829999999999999 €<br>E10 : 0.001689 €<br>E85 : 7.58E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>AVENUE DE HAMBOURG<br>Code Postal: 13008<br>Gazole : 0.001619 €<br>SP98 : 0.001784 €<br>E10 : 0.001702 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>365 Avenue de Mazargues<br>Code Postal: 13008<br>Gazole : 0.0016040000000000002 €<br>E85 : 7.59E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>15 BOULEVARD DE LA CARTONNERIE<br>Code Postal: 13011<br>Gazole : 0.001597 €<br>SP98 : 0.001786 €<br>E10 : 0.0017050000000000001 €<br>E85 : 7.58E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>175 AVENUE CLOT BEY<br>Code Postal: 13008<br>Gazole : 0.001729 €<br>SP98 : 0.001929 €<br>E10 : 0.001829 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>1/3 BOULEVARD DU SABLIER<br>Code Postal: 13008<br>Gazole : 0.0015580000000000001 €<br>SP98 : 0.001777 €<br>E10 : 0.001668 €<br>E85 : 8.7E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>67 AVENUE DES CAILLOLS<br>Code Postal: 13012<br>Gazole : 0.001562 €<br>SP98 : 0.001766 €<br>E10 : 0.001663 €<br>E85 : 7.69E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>131 route des Camoins<br>Code Postal: 13011<br>Gazole : 0.001719 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>171-173 Boulevard de Saint-Loup<br>Code Postal: 13011<br>Gazole : 0.001799 €<br>SP98 : 0.001949 €<br>E10 : 0.001849 €<br>E85 : 8.990000000000001E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>78 AV DE TOULON<br>Code Postal: 13006<br>Gazole : 0.001795 €<br>SP98 : 0.001924 €<br>E10 : 0.001814 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>57 Boulevard Romain Rolland<br>Code Postal: 13010<br>SP98 : 0.001796 €<br>E10 : 0.001722 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>359 BD MIREILLE LAUZE<br>Code Postal: 13011<br>Gazole : 0.001709 €<br>SP98 : 0.00181 €<br>E10 : 0.00173 €<br>E85 : 8.990000000000001E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>120 rue saint jean du desert<br>Code Postal: 13012<br>Gazole : 0.0016950000000000001 €<br>SP95 : 0.0017430000000000002 €<br>SP98 : 0.00181 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>75 CHE. DE CHATEAU GOMBERT<br>Code Postal: 13013<br>Gazole : 0.001684 €<br>E85 : 8.990000000000001E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>450 CHEMIN DU LITTORAL<br>Code Postal: 13016<br>Gazole : 0.001685 €<br>SP98 : 0.001815 €<br>GPLc : 9.19E-4 €<br>E10 : 0.001729 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>Avenue de Lattre de Tassigny<br>Code Postal: 13009<br>Gazole : 0.001709 €<br>E10 : 0.001759 €<br>E85 : 9.29E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>83 BD DE PLOMBIERES<br>Code Postal: 13003<br>Gazole : 0.001714 €<br>SP98 : 0.001845 €<br>E10 : 0.00175 €<br>E85 : 8.990000000000001E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>AUTOROUTE A50 - AIRE DE LA POMME<br>Code Postal: 13011<br>Gazole : 0.001828 €<br>SP98 : 0.001978 €<br>E10 : 0.001868 €<br>E85 : 9.19E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>103 BOULEVARD SAKAKINI<br>Code Postal: 13005<br>Gazole : 0.001799 €<br>SP98 : 0.001954 €<br>E10 : 0.0018440000000000002 €<br>E85 : 9.19E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>34,BD JEAN MOULIN<br>Code Postal: 13005<br>Gazole : 0.0018160000000000001 €<br>SP98 : 0.001976 €<br>E10 : 0.001866 €<br>E85 : 9.19E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>73 route des Camoins<br>Code Postal: 13011<br>Gazole : 0.001719 €<br>SP98 : 0.001829 €<br>E10 : 0.0017490000000000001 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>265 AVENUE DE MAZARGUES<br>Code Postal: 13008<br>Gazole : 0.00186 €<br>SP98 : 0.001879 €<br>E10 : 0.001789 €<br>E85 : 9.94E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>32 BOULEVARD SCHLOESING<br>Code Postal: 13009<br>Gazole : 0.001869 €<br>SP98 : 0.001885 €<br>E10 : 0.001799 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>70 BD FRANCOISE DUPARC<br>Code Postal: 13004<br>Gazole : 0.001895 €<br>SP98 : 0.001898 €<br>GPLc : 9.19E-4 €<br>E10 : 0.0018089999999999998 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>53 AV DE ST BARNABE<br>Code Postal: 13012<br>Gazole : 0.0019890000000000003 €<br>SP98 : 0.002049 €<br>E10 : 0.001929 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>35/37 BOULEVARD RABATAU<br>Code Postal: 13008<br>Gazole : 0.001954 €<br>E85 : 9.94E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>654 CHEMIN DU LITTORAL<br>Code Postal: 13016<br>Gazole : 0.001932 €<br>SP98 : 0.00199 €<br>E10 : 0.001889 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>26 CHEMIN DE STE MARTHE<br>Code Postal: 13014<br>Gazole : 0.001949 €<br>SP98 : 0.002029 €<br>E10 : 0.001949 €<br>E85 : 9.99E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>95 Avenue des roches<br>Code Postal: 13007<br>Gazole : 0.001909 €<br>SP98 : 0.0019790000000000003 €<br>E10 : 0.001899 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>171 BD PAUL CLAUDEL<br>Code Postal: 13010<br>Gazole : 0.001831 €<br>SP98 : 0.001898 €<br>E10 : 0.001802 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>60 bd Roland Dorgelès<br>Code Postal: 13000<br>Gazole : 0.0019199999999999998 €<br>SP95 : 0.001915 €<br>SP98 : 0.001935 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>81 BOULEVARD DU REDON<br>Code Postal: 13009<br>SP98 : 0.001929 €<br>E10 : 0.001889 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>7 CHEMIN DES AMARYLLIS<br>Code Postal: 13012<br>Gazole : 0.001861 €<br>SP95 : 0.001851 €<br>E10 : 0.001829 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>21 BD HENRI BARNIER<br>Code Postal: 13015<br>Gazole : 0.001729 €<br>SP98 : 0.0018520000000000001 €<br>E10 : 0.0017620000000000001 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>MARSEILLE</b><br>ANGLE BD CHAVE ET SAKAKINI<br>Code Postal: 13005<br>Gazole : 0.001789 €<br>SP98 : 0.00189 €<br>E10 : 0.0017829999999999999 €<br>E85 : 9.94E-4 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+
+                    // Fonction pour tracer un itinéraire
+                    function drawItinerary(coordinates) {
+                        var route = L.polyline(coordinates, { color: 'blue', weight: 4 }).addTo(map);
+                        map.fitBounds(route.getBounds());
+                    }
+                </script>
+            </body>
+            </html>

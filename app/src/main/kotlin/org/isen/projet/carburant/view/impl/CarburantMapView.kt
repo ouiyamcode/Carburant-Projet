@@ -56,7 +56,7 @@ class CarburantMapView(private val ctrl: CarburantController) : JFrame("🗺️ 
         }
     }
 
-    private fun updateStationsOnMap(stations: List<Station>) {
+    fun updateStationsOnMap(stations: List<Station>) {
         val jsonStations = stations.joinToString(",") { station ->
             """{"latitude": ${station.latitude}, "longitude": ${station.longitude}, "ville": "${station.ville}", "adresse": "${station.adresse}", "codePostal": "${station.codePostal}", "prixCarburants": ${station.prixCarburants.map { "\"${it.key}\": \"${it.value}\"" }.joinToString(", ", "{", "}")}}"""
         }
@@ -64,4 +64,19 @@ class CarburantMapView(private val ctrl: CarburantController) : JFrame("🗺️ 
         val script = """updateStations([$jsonStations]);"""
         webEngine.executeScript(script) // Envoie les nouvelles stations au script JS
     }
+    /**
+     * 🚗 **Afficher l’itinéraire sur la carte Leaflet**
+     * @param itineraire Liste des points GPS de l’itinéraire
+     */
+    fun updateRouteOnMap(itineraire: List<Pair<Double, Double>>) {
+        val jsonItineraire = itineraire.joinToString(",") { point ->
+            """[${point.first}, ${point.second}]"""
+        }
+
+        val script = """updateRoute([$jsonItineraire]);"""
+        Platform.runLater {
+            webEngine.executeScript(script) // Envoie les données à Leaflet
+        }
+    }
+
 }

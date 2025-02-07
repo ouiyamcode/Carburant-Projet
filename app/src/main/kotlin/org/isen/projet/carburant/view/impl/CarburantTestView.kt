@@ -20,6 +20,8 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
     private val toiletsCheckBox = JCheckBox("🚻 Toilettes publiques")
     private val airPumpCheckBox = JCheckBox("🛞 Station de gonflage")
     private val foodShopCheckBox = JCheckBox("🛒 Boutique alimentaire")
+    private val departTextField = JTextField(15) // Ville de départ
+    private val arriveeTextField = JTextField(15) // Ville d'arrivée
 
     private val searchButton = JButton("🔎 Rechercher").apply {
         background = Color(231, 76, 60)
@@ -54,6 +56,13 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         addActionListener {
             CarburantMapView(ctrl).isVisible = true
         }
+    }
+    private val itineraireButton = JButton("🚗 Afficher Itinéraire").apply {
+        background = Color(241, 196, 15) // Jaune
+        foreground = Color.BLACK
+        font = Font("Arial", Font.BOLD, 14)
+        isFocusPainted = false
+        addActionListener(this@CarburantTestView)
     }
 
     private val tableModel = DefaultTableModel(arrayOf("ID", "Ville", "Adresse", "Latitude", "Longitude", "Prix"), 0)
@@ -126,6 +135,20 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
             gbc.gridx = 0
             gbc.gridy = 3
             add(foodShopCheckBox, gbc)
+
+            // Champs pour la recherche d'itinéraire
+            gbc.gridx = 0
+            gbc.gridy = 4
+            add(JLabel("🚦 Départ :"), gbc)
+            gbc.gridx = 1
+            add(departTextField, gbc)
+
+            gbc.gridx = 0
+            gbc.gridy = 5
+            add(JLabel("🏁 Arrivée :"), gbc)
+            gbc.gridx = 1
+            add(arriveeTextField, gbc)
+
         }
 
         val buttonPanel = JPanel().apply {
@@ -134,6 +157,8 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
             add(primarySourceButton)
             add(secondarySourceButton)
             add(openMapButton)
+            add(itineraireButton)
+
         }
 
         val controlPanel = JPanel(BorderLayout()).apply {
@@ -187,7 +212,19 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
             secondarySourceButton -> {
                 ctrl.updateModelForCityWithSource(city, false, selectedFuel, hasToilets, hasAirPump, hasFoodShop)
             }
+            itineraireButton -> {
+                val depart = departTextField.text.trim()
+                val arrivee = arriveeTextField.text.trim()
+
+                if (depart.isEmpty() || arrivee.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "🚨 Veuillez entrer les deux villes !", "Erreur", JOptionPane.ERROR_MESSAGE)
+                    return
+                }
+
+                ctrl.updateModelForItineraireWithSource(depart,arrivee, false)
+            }
         }
+
     }
 
     class MultiLineTableCellRenderer : JTextArea(), TableCellRenderer {
