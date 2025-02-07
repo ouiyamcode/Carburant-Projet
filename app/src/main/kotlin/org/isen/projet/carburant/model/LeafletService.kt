@@ -6,7 +6,7 @@ import java.io.PrintWriter
 object LeafletService {
     private const val MAP_FILE_PATH = "app/src/main/resources/map.html"
 
-    fun generateMapHtml(stations: List<Station>) {
+    fun generateMapHtml(stations: List<Station>, itineraire: List<Pair<Double, Double>>? = null) {
         if (stations.isEmpty()) return
 
         val firstStation = stations.first()
@@ -48,6 +48,16 @@ object LeafletService {
             """.trimIndent()
         }}
 
+        ${if (itineraire != null && itineraire.isNotEmpty()) {
+            """
+                    var routeCoords = [
+                        ${itineraire.joinToString(",\n") { "[${it.first}, ${it.second}]" }}
+                    ];
+
+                    var routeLine = L.polyline(routeCoords, {color: 'blue', weight: 4}).addTo(map);
+                    map.fitBounds(routeLine.getBounds());
+            """.trimIndent()
+        } else ""}
                 </script>
             </body>
             </html>

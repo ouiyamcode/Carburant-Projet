@@ -14,13 +14,41 @@
             <body>
                 <div id='map'></div>
                 <script>
-                    var map = L.map('map').setView([43.283843990121, 5.5440513689708], 12);
+                    var map = L.map('map').setView([43.183229311568, 5.6951125902699005], 12);
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; OpenStreetMap contributors'
                     }).addTo(map);
 
-                    var marker = L.marker([43.283843990121, 5.5440513689708])
+                    var marker = L.marker([43.183229311568, 5.6951125902699005])
+    .addTo(map)
+    .bindPopup("<b>Saint-Cyr-sur-Mer</b><br>ZAC DES PRADEAUX<br>Code Postal: 83270<br>Gazole : 1.657 €<br>E10 : 1.732 €<br>SP98 : 1.829 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.181, 5.69751])
+    .addTo(map)
+    .bindPopup("<b>Saint-Cyr-sur-Mer</b><br>QUARTIER LA BANETTE RN.559<br>Code Postal: 83270<br>Gazole : 1.830 €<br>E10 : 1.890 €<br>SP98 : 1.990 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.1809050761, 5.71030196549])
+    .addTo(map)
+    .bindPopup("<b>SAINT-CYR-SUR-MER</b><br>ZAC des Pradeaux<br>Code Postal: 83270<br>");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.217, 5.546])
+    .addTo(map)
+    .bindPopup("<b>CASSIS</b><br>QUARTIER STE CROIX<br>Code Postal: 13260<br>Gazole : 1.773 €<br>E85 : 0.799 €<br>E10 : 1.834 €<br>SP98 : 1.944 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.283843990121, 5.5440513689708])
     .addTo(map)
     .bindPopup("<b>Aubagne</b><br>1509 RN8<br>Code Postal: 13400<br>Gazole : 1.679 €<br>E10 : 1.739 €<br>SP98 : 1.839 €");
 
@@ -69,48 +97,6 @@ var marker = L.marker([43.293, 5.593])
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.217, 5.546])
-    .addTo(map)
-    .bindPopup("<b>CASSIS</b><br>QUARTIER STE CROIX<br>Code Postal: 13260<br>Gazole : 1.773 €<br>E85 : 0.799 €<br>E10 : 1.834 €<br>SP98 : 1.944 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.098, 5.826])
-    .addTo(map)
-    .bindPopup("<b>SIX-FOURS-LES-PLAGES</b><br>60 traverse Font de Fillol<br>Code Postal: 83140<br>Gazole : 1.663 €<br>SP95 : 1.799 €<br>E10 : 1.731 €<br>SP98 : 1.831 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.11, 5.813])
-    .addTo(map)
-    .bindPopup("<b>Six-Fours-les-Plages</b><br>206 PLAGE DE BONNEGRACE - RD559<br>Code Postal: 83140<br>Gazole : 1.661 €<br>E85 : 0.774 €<br>E10 : 1.733 €<br>SP98 : 1.831 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.089, 5.852])
-    .addTo(map)
-    .bindPopup("<b>Six-Fours-les-Plages</b><br>RD 16 - 333 ROUTE DES SABLETTES<br>Code Postal: 83140<br>Gazole : 1.752 €<br>E85 : 0.783 €<br>E10 : 1.823 €<br>SP98 : 1.933 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.103, 5.821])
-    .addTo(map)
-    .bindPopup("<b>SIX-FOURS-LES-PLAGES</b><br>Avenue de la Mer<br>Code Postal: 83140<br>Gazole : 1.663 €<br>SP95 : 1.799 €<br>E85 : 0.758 €<br>E10 : 1.731 €<br>SP98 : 1.831 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.092, 5.844])
-    .addTo(map)
-    .bindPopup("<b>Six-Fours-les-Plages</b><br>TRAVERSE DE BAYLE<br>Code Postal: 83140<br>Gazole : 1.663 €<br>E85 : 0.758 €<br>E10 : 1.731 €<br>SP98 : 1.831 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
 var marker = L.marker([43.12237, 5.84962])
     .addTo(map)
     .bindPopup("<b>OLLIOULES</b><br>715 RTE DE LA SEYNE<br>Code Postal: 83190<br>Gazole : 1.659 €<br>E10 : 1.729 €<br>SP98 : 1.837 €");
@@ -135,6 +121,55 @@ marker.on('click', function (e) {
 var marker = L.marker([43.124, 5.823])
     .addTo(map)
     .bindPopup("<b>OLLIOULES</b><br>LE PETIT PLAN<br>Code Postal: 83190<br>Gazole : 1.659 €<br>E85 : 0.758 €<br>E10 : 1.729 €<br>SP98 : 1.837 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.190513098219, 5.6023208384662])
+    .addTo(map)
+    .bindPopup("<b>La Ciotat</b><br>QUARTIER PIGNET DU ROHAN ZAC DE LATTRE DE TASSIGNY<br>Code Postal: 13600<br>Gazole : 1.697 €<br>E85 : 0.758 €<br>E10 : 1.766 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.194, 5.671])
+    .addTo(map)
+    .bindPopup("<b>La Ciotat</b><br>A50 - AIRE DE LA BAIE DE LA CIOTAT (ex plaines baronnes) sens toulon -marseille<br>Code Postal: 13600<br>Gazole : 1.841 €<br>GPLc : 1.109 €<br>E10 : 1.883 €<br>SP98 : 2.007 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.18899, 5.63252])
+    .addTo(map)
+    .bindPopup("<b>LA CIOTAT</b><br>RD 559 AVENUE PAUL ROVARCH<br>Code Postal: 13600<br>Gazole : 1.662 €<br>E10 : 1.739 €<br>SP98 : 1.839 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.192, 5.666])
+    .addTo(map)
+    .bindPopup("<b>La Ciotat</b><br>A50 - Aire des freres lumieres (ex liouquet) - Sens Marseilles Toulon<br>Code Postal: 13600<br>Gazole : 1.841 €<br>GPLc : 1.109 €<br>E10 : 1.883 €<br>SP98 : 2.007 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.184, 5.61])
+    .addTo(map)
+    .bindPopup("<b>LA CIOTAT</b><br>Avenue Ernest Subilia<br>Code Postal: 13600<br>Gazole : 1.729 €<br>E85 : 0.859 €<br>E10 : 1.829 €<br>SP98 : 1.899 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.188, 5.602])
+    .addTo(map)
+    .bindPopup("<b>LA CIOTAT</b><br>chemin du puits de brunet<br>Code Postal: 13600<br>Gazole : 1.691 €<br>SP95 : 1.837 €<br>E10 : 1.759 €<br>SP98 : 1.881 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.193, 5.6])
+    .addTo(map)
+    .bindPopup("<b>LA CIOTAT</b><br>1045 AVENUE �MILE BODIN<br>Code Postal: 13600<br>Gazole : 1.729 €<br>E85 : 0.859 €<br>GPLc : 0.999 €<br>E10 : 1.829 €<br>SP98 : 1.899 €");
 
 marker.on('click', function (e) {
     this.openPopup();
@@ -177,27 +212,6 @@ marker.on('click', function (e) {
 var marker = L.marker([43.083, 5.894])
     .addTo(map)
     .bindPopup("<b>La Seyne-sur-Mer</b><br>Chemin de l'evescat aux sablettes<br>Code Postal: 83500<br>Gazole : 1.665 €<br>SP95 : 1.820 €<br>E10 : 1.731 €<br>SP98 : 1.832 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.183229311568, 5.6951125902699005])
-    .addTo(map)
-    .bindPopup("<b>Saint-Cyr-sur-Mer</b><br>ZAC DES PRADEAUX<br>Code Postal: 83270<br>Gazole : 1.657 €<br>E10 : 1.732 €<br>SP98 : 1.829 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.181, 5.69751])
-    .addTo(map)
-    .bindPopup("<b>Saint-Cyr-sur-Mer</b><br>QUARTIER LA BANETTE RN.559<br>Code Postal: 83270<br>Gazole : 1.830 €<br>E10 : 1.890 €<br>SP98 : 1.990 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.1809050761, 5.71030196549])
-    .addTo(map)
-    .bindPopup("<b>SAINT-CYR-SUR-MER</b><br>ZAC des Pradeaux<br>Code Postal: 83270<br>");
 
 marker.on('click', function (e) {
     this.openPopup();
@@ -258,56 +272,88 @@ var marker = L.marker([43.12814, 5.90563])
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.190513098219, 5.6023208384662])
+var marker = L.marker([43.098, 5.826])
     .addTo(map)
-    .bindPopup("<b>La Ciotat</b><br>QUARTIER PIGNET DU ROHAN ZAC DE LATTRE DE TASSIGNY<br>Code Postal: 13600<br>Gazole : 1.697 €<br>E85 : 0.758 €<br>E10 : 1.766 €");
+    .bindPopup("<b>SIX-FOURS-LES-PLAGES</b><br>60 traverse Font de Fillol<br>Code Postal: 83140<br>Gazole : 1.663 €<br>SP95 : 1.799 €<br>E10 : 1.731 €<br>SP98 : 1.831 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.194, 5.671])
+var marker = L.marker([43.11, 5.813])
     .addTo(map)
-    .bindPopup("<b>La Ciotat</b><br>A50 - AIRE DE LA BAIE DE LA CIOTAT (ex plaines baronnes) sens toulon -marseille<br>Code Postal: 13600<br>Gazole : 1.841 €<br>GPLc : 1.109 €<br>E10 : 1.883 €<br>SP98 : 2.007 €");
+    .bindPopup("<b>Six-Fours-les-Plages</b><br>206 PLAGE DE BONNEGRACE - RD559<br>Code Postal: 83140<br>Gazole : 1.661 €<br>E85 : 0.774 €<br>E10 : 1.733 €<br>SP98 : 1.831 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.18899, 5.63252])
+var marker = L.marker([43.089, 5.852])
     .addTo(map)
-    .bindPopup("<b>LA CIOTAT</b><br>RD 559 AVENUE PAUL ROVARCH<br>Code Postal: 13600<br>Gazole : 1.662 €<br>E10 : 1.739 €<br>SP98 : 1.839 €");
+    .bindPopup("<b>Six-Fours-les-Plages</b><br>RD 16 - 333 ROUTE DES SABLETTES<br>Code Postal: 83140<br>Gazole : 1.752 €<br>E85 : 0.783 €<br>E10 : 1.823 €<br>SP98 : 1.933 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.192, 5.666])
+var marker = L.marker([43.103, 5.821])
     .addTo(map)
-    .bindPopup("<b>La Ciotat</b><br>A50 - Aire des freres lumieres (ex liouquet) - Sens Marseilles Toulon<br>Code Postal: 13600<br>Gazole : 1.841 €<br>GPLc : 1.109 €<br>E10 : 1.883 €<br>SP98 : 2.007 €");
+    .bindPopup("<b>SIX-FOURS-LES-PLAGES</b><br>Avenue de la Mer<br>Code Postal: 83140<br>Gazole : 1.663 €<br>SP95 : 1.799 €<br>E85 : 0.758 €<br>E10 : 1.731 €<br>SP98 : 1.831 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.184, 5.61])
+var marker = L.marker([43.092, 5.844])
     .addTo(map)
-    .bindPopup("<b>LA CIOTAT</b><br>Avenue Ernest Subilia<br>Code Postal: 13600<br>Gazole : 1.729 €<br>E85 : 0.859 €<br>E10 : 1.829 €<br>SP98 : 1.899 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.188, 5.602])
-    .addTo(map)
-    .bindPopup("<b>LA CIOTAT</b><br>chemin du puits de brunet<br>Code Postal: 13600<br>Gazole : 1.691 €<br>SP95 : 1.837 €<br>E10 : 1.759 €<br>SP98 : 1.881 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.193, 5.6])
-    .addTo(map)
-    .bindPopup("<b>LA CIOTAT</b><br>1045 AVENUE �MILE BODIN<br>Code Postal: 13600<br>Gazole : 1.729 €<br>E85 : 0.859 €<br>GPLc : 0.999 €<br>E10 : 1.829 €<br>SP98 : 1.899 €");
+    .bindPopup("<b>Six-Fours-les-Plages</b><br>TRAVERSE DE BAYLE<br>Code Postal: 83140<br>Gazole : 1.663 €<br>E85 : 0.758 €<br>E10 : 1.731 €<br>SP98 : 1.831 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
 
+                            var routeCoords = [
+                        [43.125326, 5.930342],
+[43.127361, 5.917984],
+[43.125019, 5.906077],
+[43.126707, 5.89285],
+[43.125786, 5.878811],
+[43.121453, 5.867694],
+[43.119908, 5.854211],
+[43.120899, 5.838627],
+[43.124522, 5.826965],
+[43.12969, 5.816435],
+[43.13665, 5.806134],
+[43.141794, 5.791719],
+[43.146289, 5.780359],
+[43.147635, 5.767904],
+[43.157591, 5.766766],
+[43.167137, 5.768328],
+[43.178099, 5.769769],
+[43.18744, 5.76794],
+[43.195613, 5.762348],
+[43.20117, 5.751674],
+[43.202781, 5.732235],
+[43.199234, 5.717],
+[43.194106, 5.689976],
+[43.192777, 5.677557],
+[43.193117, 5.664967],
+[43.192979, 5.652312],
+[43.1981, 5.639206],
+[43.205533, 5.63195],
+[43.208466, 5.618051],
+[43.20435, 5.606095],
+[43.204165, 5.593405],
+[43.210422, 5.583348],
+[43.219521, 5.581083],
+[43.228368, 5.583626],
+[43.236891, 5.590443],
+[43.245591, 5.596067],
+[43.254957, 5.594527],
+[43.263488, 5.588675],
+[43.272503, 5.589009],
+[43.280963, 5.584555],
+[43.288014, 5.576695]
+                    ];
+
+                    var routeLine = L.polyline(routeCoords, {color: 'blue', weight: 4}).addTo(map);
+                    map.fitBounds(routeLine.getBounds());
                 </script>
             </body>
             </html>

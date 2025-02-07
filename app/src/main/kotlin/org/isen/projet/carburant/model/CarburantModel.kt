@@ -57,6 +57,12 @@ class CarburantModel {
 
             logger.info("📌 Itinéraire trouvé avec ${itineraire.size} points GPS")
 
+            // 🔥 Mise à jour de la carte avec le tracé de l’itinéraire
+            withContext(Dispatchers.IO) {
+                pcs.firePropertyChange("itineraire", null, itineraire)
+                logger.info("🗺️ Mise à jour de la carte avec l'itinéraire")
+            }
+
             val villes = extraireVillesSurItineraire(itineraire, 10.0)
             logger.info("🔍 Villes détectées sur l'itinéraire : $villes")
 
@@ -68,6 +74,7 @@ class CarburantModel {
             val dataSource = if (useJsonSource) dataSourceJson else dataSourceXml
             val allStations = mutableListOf<Station>()
 
+            // 🔥 Récupération des stations en parallèle
             val jobs = villes.map { ville ->
                 async {
                     logger.info("📡 Récupération des stations pour $ville...")
@@ -81,22 +88,20 @@ class CarburantModel {
                     }
                 }
             }
-            jobs.awaitAll()
+            jobs.awaitAll() // Attend que toutes les récupérations soient terminées
 
+            // 🔍 Vérifier le total des stations avant mise à jour
+            logger.info("📊 Total des stations collectées : ${allStations.size}")
 
-            logger.info("📊 Vérification finale avant mise à jour : ${allStations.size} stations collectées")
+            withContext(Dispatchers.IO) {
+                updateStations(allStations)
+                LeafletService.generateMapHtml(stations, itineraire)
 
-            if (allStations.isEmpty()) {
-                logger.error("❌ ERREUR : Aucune station trouvée sur l'itinéraire !")
-            } else {
-                withContext(Dispatchers.IO) {
-                    updateStations(allStations)
-                    logger.info("✅ ${allStations.size} stations affichées sur la carte et le tableau")
-                }
+                logger.info("✅ ${allStations.size} stations affichées sur la carte et le tableau")
             }
-
         }
     }
+
 
 
 
