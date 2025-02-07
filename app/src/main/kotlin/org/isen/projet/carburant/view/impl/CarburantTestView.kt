@@ -20,7 +20,7 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
     private val fuelTypeComboBox = JComboBox(arrayOf("Aucun", "Gazole", "SP95", "SP98", "GPLc", "E10", "E85"))
 
     private val toiletsCheckBox = JCheckBox("🚻 Toilettes publiques")
-    private val airPumpCheckBox = JCheckBox("🛞 Station de gonflage")
+    private val airPumpCheckBox = JCheckBox(" Station de gonflage")
     private val foodShopCheckBox = JCheckBox("🛒 Boutique alimentaire")
 
     private val departTextField = JTextField(15)
@@ -83,7 +83,7 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         ctrl.registerView(this)
         preferredSize = Dimension(1200, 600)
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-        contentPane.background = Color(44, 62, 80)
+        contentPane.background = Color(173, 216, 230)
 
         modeComboBox.addActionListener { updateMode() }
 
@@ -102,11 +102,16 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         for (i in columnWidths.indices) {
             resultTable.columnModel.getColumn(i).preferredWidth = columnWidths[i]
         }
+        for (i in 0 until resultTable.rowCount) {
+            resultTable.setRowHeight(i, 200) // Met toutes les lignes à 60 pixels
+        }
+
+
 
 
         val searchPanel = JPanel(GridBagLayout()).apply {
             border = EmptyBorder(10, 10, 10, 10)
-            background = Color(52, 73, 94)
+            background = Color(173, 216, 230)
             val gbc = GridBagConstraints().apply {
                 gridx = 0
                 gridy = 0

@@ -14,36 +14,78 @@
             <body>
                 <div id='map'></div>
                 <script>
-                    var map = L.map('map').setView([43.114940470729, 6.110020452270001], 12);
+                    var map = L.map('map').setView([43.126547547728904, 5.924147162598048], 12);
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; OpenStreetMap contributors'
                     }).addTo(map);
 
-                    var marker = L.marker([43.114940470729, 6.110020452270001])
+                    var marker = L.marker([43.126547547728904, 5.924147162598048])
     .addTo(map)
-    .bindPopup("<b>HYERES</b><br>ZAC DU ROUBAUD<br>Code Postal: 83400<br>Gazole : 1.646 €<br>E10 : 1.720 €<br>SP98 : 1.820 €");
+    .bindPopup("<b>TOULON</b><br>508 AVENUE FOCH<br>Code Postal: 83100<br>Gazole : 1.879 €<br>SP98 : 2.036 €<br>E10 : 1.926 €<br>E85 : 1.119 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.107, 6.129])
+var marker = L.marker([43.12167299508907, 5.974345981618805])
     .addTo(map)
-    .bindPopup("<b>HYERES</b><br>ANGLE BD GEOFFROY ST HILAIRE<br>Code Postal: 83400<br>Gazole : 1.650 €<br>E10 : 1.720 €<br>SP98 : 1.820 €");
+    .bindPopup("<b>TOULON</b><br>2338 Avenue Joseph Gasquet<br>Code Postal: 83100<br>Gazole : 1.9690000000000003 €<br>SP98 : 2.149 €<br>E10 : 2.049 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.12133, 6.13816])
+var marker = L.marker([43.139305183141865, 5.885086467042961])
     .addTo(map)
-    .bindPopup("<b>HYERES</b><br>2 AVENUE DU QUINZI�ME CORPS<br>Code Postal: 83400<br>Gazole : 1.769 €<br>E10 : 1.839 €<br>SP98 : 1.939 €");
+    .bindPopup("<b>TOULON</b><br>620 Rue David<br>Code Postal: 83200<br>Gazole : 1.9690000000000003 €<br>SP98 : 2.149 €<br>E10 : 2.049 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.0846876404, 6.14856278346])
+var marker = L.marker([0.0, 0.0])
     .addTo(map)
-    .bindPopup("<b>HYERES</b><br>CD 97 LE PALYVESTRE<br>Code Postal: 83400<br>Gazole : 1.759 €<br>E85 : 0.816 €<br>E10 : 1.829 €<br>SP98 : 1.939 €");
+    .bindPopup("<b>TOULON</b><br>160 BOULEVARD G.CLEMENCEAU<br>Code Postal: 83000<br>Gazole : 1.879 €<br>SP98 : 1.99 €<br>GPLc : 1.034 €<br>E10 : 1.99 €<br>E85 : 1.119 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.11461070895888, 5.935150973382671])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>AV INFANTERIE DE MARINE<br>Code Postal: 83000<br>Gazole : 1.791 €<br>SP98 : 1.9790000000000003 €<br>E10 : 1.906 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>322 AV.LE BELLEGOU RODE<br>Code Postal: 83000<br>Gazole : 1.748 €<br>SP98 : 1.951 €<br>GPLc : 0.969 €<br>E10 : 1.864 €<br>E85 : 1.119 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.11783125328669, 5.936488139677255])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>12 Rond-Point Général Bonaparte<br>Code Postal: 83100<br>SP98 : 2.099 €<br>E10 : 1.9790000000000003 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([0.0, 0.0])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>Boulevard Briand<br>Code Postal: 83200<br>Gazole : 1.779 €<br>SP98 : 2.009 €<br>E10 : 1.929 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.1278845, 5.976962388719512])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>283 Rue Henri Sainte-Claire Deville<br>Code Postal: 83100<br>Gazole : 2.059 €<br>SP95 : 2.029 €<br>SP98 : 2.079 €<br>E10 : 1.975 €");
+
+marker.on('click', function (e) {
+    this.openPopup();
+});
+var marker = L.marker([43.1278721, 5.9055992])
+    .addTo(map)
+    .bindPopup("<b>TOULON</b><br>95 Boulevard Général Brosset<br>Code Postal: 83200<br>Gazole : 1.9690000000000003 €");
 
 marker.on('click', function (e) {
     this.openPopup();
