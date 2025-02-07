@@ -14,23 +14,17 @@ import javax.swing.table.TableCellRenderer
 
 class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Recherche de Stations"), ICarburantView, ActionListener {
 
+    private val modeComboBox = JComboBox(arrayOf("🔎 Recherche par Ville", "🚗 Mode Itinéraire"))
+
     private val cityTextField = JTextField(15)
     private val fuelTypeComboBox = JComboBox(arrayOf("Aucun", "Gazole", "SP95", "SP98", "GPLc", "E10", "E85"))
 
     private val toiletsCheckBox = JCheckBox("🚻 Toilettes publiques")
     private val airPumpCheckBox = JCheckBox("🛞 Station de gonflage")
     private val foodShopCheckBox = JCheckBox("🛒 Boutique alimentaire")
-    private val departTextField = JTextField(15) // Ville de départ
-    private val arriveeTextField = JTextField(15) // Ville d'arrivée
 
-    private val searchButton = JButton("🔎 Rechercher").apply {
-        background = Color(231, 76, 60)
-        foreground = Color.WHITE
-        font = Font("Arial", Font.BOLD, 16)
-        isFocusPainted = false
-        border = BorderFactory.createLineBorder(Color(192, 57, 43), 2)
-        addActionListener(this@CarburantTestView)
-    }
+    private val departTextField = JTextField(15)
+    private val arriveeTextField = JTextField(15)
 
     private val primarySourceButton = JButton("🌍 Source Principale").apply {
         background = Color(46, 204, 113)
@@ -57,8 +51,9 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
             CarburantMapView(ctrl).isVisible = true
         }
     }
+
     private val itineraireButton = JButton("🚗 Afficher Itinéraire").apply {
-        background = Color(241, 196, 15) // Jaune
+        background = Color(241, 196, 15)
         foreground = Color.BLACK
         font = Font("Arial", Font.BOLD, 14)
         isFocusPainted = false
@@ -72,7 +67,7 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         setShowGrid(true)
         gridColor = Color.GRAY
         autoResizeMode = JTable.AUTO_RESIZE_OFF
-        background = Color(230, 230, 230)
+        background = Color(245, 245, 245)
         selectionBackground = Color(52, 152, 219)
         selectionForeground = Color.WHITE
         getColumnModel().getColumn(5).cellRenderer = MultiLineTableCellRenderer()
@@ -90,20 +85,17 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         contentPane.background = Color(44, 62, 80)
 
+        modeComboBox.addActionListener { updateMode() }
+
         val resultPanel = JPanel(BorderLayout()).apply {
             border = EmptyBorder(10, 10, 10, 10)
-            background = Color(230, 230, 230)
+            background = Color(240, 240, 240)
             val scrollPane = JScrollPane(resultTable).apply {
                 horizontalScrollBarPolicy = JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
                 verticalScrollBarPolicy = JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED
                 preferredSize = Dimension(1150, 300)
             }
             add(scrollPane, BorderLayout.CENTER)
-        }
-
-        val columnWidths = intArrayOf(100, 150, 350, 120, 120, 450)
-        for (i in columnWidths.indices) {
-            resultTable.columnModel.getColumn(i).preferredWidth = columnWidths[i]
         }
 
         val searchPanel = JPanel(GridBagLayout()).apply {
@@ -116,49 +108,51 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
                 insets = Insets(5, 5, 5, 5)
             }
 
+            add(JLabel("🔁 Mode de recherche :"), gbc)
+            gbc.gridx = 1
+            add(modeComboBox, gbc)
+
+            gbc.gridx = 0
+            gbc.gridy = 1
             add(JLabel("🏙️ Ville :"), gbc)
             gbc.gridx = 1
             add(cityTextField, gbc)
 
             gbc.gridx = 0
-            gbc.gridy = 1
+            gbc.gridy = 2
             add(JLabel("⛽ Type de carburant :"), gbc)
             gbc.gridx = 1
             add(fuelTypeComboBox, gbc)
 
             gbc.gridx = 0
-            gbc.gridy = 2
+            gbc.gridy = 3
             add(toiletsCheckBox, gbc)
             gbc.gridx = 1
             add(airPumpCheckBox, gbc)
 
             gbc.gridx = 0
-            gbc.gridy = 3
+            gbc.gridy = 4
             add(foodShopCheckBox, gbc)
 
-            // Champs pour la recherche d'itinéraire
             gbc.gridx = 0
-            gbc.gridy = 4
+            gbc.gridy = 5
             add(JLabel("🚦 Départ :"), gbc)
             gbc.gridx = 1
             add(departTextField, gbc)
 
             gbc.gridx = 0
-            gbc.gridy = 5
+            gbc.gridy = 6
             add(JLabel("🏁 Arrivée :"), gbc)
             gbc.gridx = 1
             add(arriveeTextField, gbc)
-
         }
 
         val buttonPanel = JPanel().apply {
             background = Color(52, 73, 94)
-            add(searchButton)
             add(primarySourceButton)
             add(secondarySourceButton)
             add(openMapButton)
             add(itineraireButton)
-
         }
 
         val controlPanel = JPanel(BorderLayout()).apply {
@@ -170,8 +164,48 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         contentPane.add(resultPanel, BorderLayout.CENTER)
         contentPane.add(controlPanel, BorderLayout.SOUTH)
 
+        updateMode()
         isVisible = true
         pack()
+    }
+
+    override fun actionPerformed(e: ActionEvent?) {
+        val mode = modeComboBox.selectedIndex
+        when (e?.source) {
+            primarySourceButton, secondarySourceButton -> {
+                if (mode == 0) {
+                    val city = cityTextField.text.trim()
+                    if (city.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "🚨 Veuillez entrer une ville !", "Erreur", JOptionPane.ERROR_MESSAGE)
+                        return
+                    }
+                    ctrl.updateModelForCityWithSource(city, e.source == primarySourceButton)
+                }
+            }
+            itineraireButton -> {
+                if (mode == 1) {
+                    val depart = departTextField.text.trim()
+                    val arrivee = arriveeTextField.text.trim()
+
+                    if (depart.isEmpty() || arrivee.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "🚨 Veuillez entrer une ville de départ et d'arrivée !", "Erreur", JOptionPane.ERROR_MESSAGE)
+                        return
+                    }
+
+                    ctrl.updateModelForItineraireWithSource(depart, arrivee, false)
+                }
+            }
+        }
+    }
+
+    private fun updateMode() {
+        val mode = modeComboBox.selectedIndex
+        cityTextField.isEnabled = (mode == 0)
+        departTextField.isEnabled = (mode == 1)
+        arriveeTextField.isEnabled = (mode == 1)
+        itineraireButton.isEnabled = (mode == 1)
+        primarySourceButton.isEnabled = (mode == 0)
+        secondarySourceButton.isEnabled = (mode == 0)
     }
 
     override fun display() {
@@ -182,10 +216,12 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         isVisible = false
     }
 
-    override fun propertyChange(evt: PropertyChangeEvent) {
+    override fun propertyChange(evt: PropertyChangeEvent?) {
+        if (evt == null) return
+
         if (evt.propertyName == "stations") {
             val stations = (evt.newValue as? List<*>)?.filterIsInstance<Station>() ?: emptyList()
-            tableModel.rowCount = 0
+            tableModel.rowCount = 0 // Vide la table avant d'ajouter de nouvelles valeurs
             for (station in stations) {
                 val prix = station.prixCarburants.entries.joinToString("\n") { "${it.key}: ${it.value}€" }
                 tableModel.addRow(arrayOf(station.id, station.ville, station.adresse, station.latitude, station.longitude, prix))
@@ -193,41 +229,8 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         }
     }
 
-    override fun actionPerformed(e: ActionEvent?) {
-        val city = cityTextField.text.trim()
-        if (city.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "🚨 Veuillez entrer une ville !", "Erreur", JOptionPane.ERROR_MESSAGE)
-            return
-        }
-
-        val selectedFuel = if (fuelTypeComboBox.selectedItem == "Aucun") null else fuelTypeComboBox.selectedItem.toString()
-        val hasToilets = toiletsCheckBox.isSelected
-        val hasAirPump = airPumpCheckBox.isSelected
-        val hasFoodShop = foodShopCheckBox.isSelected
-
-        when (e?.source) {
-            searchButton, primarySourceButton -> {
-                ctrl.updateModelForCityWithSource(city, true, selectedFuel, hasToilets, hasAirPump, hasFoodShop)
-            }
-            secondarySourceButton -> {
-                ctrl.updateModelForCityWithSource(city, false, selectedFuel, hasToilets, hasAirPump, hasFoodShop)
-            }
-            itineraireButton -> {
-                val depart = departTextField.text.trim()
-                val arrivee = arriveeTextField.text.trim()
-
-                if (depart.isEmpty() || arrivee.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "🚨 Veuillez entrer les deux villes !", "Erreur", JOptionPane.ERROR_MESSAGE)
-                    return
-                }
-
-                ctrl.updateModelForItineraireWithSource(depart,arrivee, false)
-            }
-        }
-
-    }
-
     class MultiLineTableCellRenderer : JTextArea(), TableCellRenderer {
+
         init {
             lineWrap = true
             wrapStyleWord = true
@@ -239,9 +242,26 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
             hasFocus: Boolean, row: Int, column: Int
         ): Component {
             text = value?.toString() ?: ""
-            background = if (isSelected) table.selectionBackground else table.background
-            foreground = if (isSelected) table.selectionForeground else table.foreground
+
+            // 🎨 Appliquer les couleurs en fonction de la sélection
+            if (isSelected) {
+                background = table.selectionBackground
+                foreground = table.selectionForeground
+            } else {
+                background = table.background
+                foreground = table.foreground
+            }
+
+            // 📏 Ajustement automatique de la hauteur des lignes en fonction du contenu
+            val fontMetrics = getFontMetrics(font)
+            val cellWidth = table.columnModel.getColumn(column).width
+            val textWidth = fontMetrics.stringWidth(text)
+            val lineCount = (textWidth / cellWidth) + 1
+            table.setRowHeight(row, lineCount * fontMetrics.height)
+
             return this
         }
     }
+
+
 }

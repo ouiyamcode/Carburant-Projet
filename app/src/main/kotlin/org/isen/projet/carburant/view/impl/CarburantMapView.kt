@@ -53,11 +53,6 @@ class CarburantMapView(private val ctrl: CarburantController) : JFrame("🗺️ 
             Platform.runLater {
                 updateStationsOnMap(stations)
             }
-        } else if (evt.propertyName == "itineraire") {
-            val itineraire = evt.newValue as? List<Pair<Double, Double>> ?: return
-            Platform.runLater {
-                updateRouteOnMap(itineraire)
-            }
         }
     }
 
@@ -69,7 +64,6 @@ class CarburantMapView(private val ctrl: CarburantController) : JFrame("🗺️ 
         val script = """updateStations([$jsonStations]);"""
         webEngine.executeScript(script) // Envoie les nouvelles stations au script JS
     }
-
     /**
      * 🚗 **Afficher l’itinéraire sur la carte Leaflet**
      * @param itineraire Liste des points GPS de l’itinéraire
@@ -79,13 +73,10 @@ class CarburantMapView(private val ctrl: CarburantController) : JFrame("🗺️ 
             """[${point.first}, ${point.second}]"""
         }
 
-        val script = """
-            var routeCoordinates = [$jsonItineraire];
-            var polyline = L.polyline(routeCoordinates, {color: 'blue', weight: 5}).addTo(map);
-            map.fitBounds(polyline.getBounds());
-        """
+        val script = """updateRoute([$jsonItineraire]);"""
         Platform.runLater {
             webEngine.executeScript(script) // Envoie les données à Leaflet
         }
     }
+
 }
