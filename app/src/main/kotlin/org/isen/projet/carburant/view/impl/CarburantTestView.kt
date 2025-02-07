@@ -206,8 +206,6 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
                         JOptionPane.showMessageDialog(this, "🚨 Veuillez entrer une ville de départ et d'arrivée !", "Erreur", JOptionPane.ERROR_MESSAGE)
                         return
                     }
-                    tableModel.rowCount = 0 // Vide le tableau avant d'afficher le chargement
-                    tableModel.addRow(arrayOf("⏳", "Chargement en cours...", "", "", "", "Veuillez patienter..."))
                     ctrl.updateModelForItineraireWithSource(depart, arrivee, false)
                 }
             }
@@ -240,10 +238,6 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         if (evt == null) return
 
         if (evt.propertyName == "stations") {
-            SwingUtilities.invokeLater {
-                tableModel.rowCount = 0 // Efface le message de chargement avant d'afficher les résultats
-            }
-
             val stations = (evt.newValue as? List<*>)?.filterIsInstance<Station>() ?: emptyList()
             tableModel.rowCount = 0 // Vide la table avant d'ajouter de nouvelles valeurs
             for (station in stations) {

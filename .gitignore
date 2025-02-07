@@ -3,3 +3,4 @@
 
 # Ignore Gradle build output directory
 build
+test_my_logger-07-févr-*.log.gz
