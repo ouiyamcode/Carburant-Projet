@@ -14,64 +14,36 @@
             <body>
                 <div id='map'></div>
                 <script>
-                    var map = L.map('map').setView([43.12753, 5.97764], 12);
+                    var map = L.map('map').setView([43.114940470729, 6.110020452270001], 12);
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; OpenStreetMap contributors'
                     }).addTo(map);
 
-                    var marker = L.marker([43.12753, 5.97764])
+                    var marker = L.marker([43.114940470729, 6.110020452270001])
     .addTo(map)
-    .bindPopup("<b>TOULON</b><br>283 Rue Henri Sainte-Claire Deville<br>Code Postal: 83100<br>Gazole : 1.682 €<br>SP95 : 1.812 €<br>E10 : 1.748 €<br>SP98 : 1.859 €");
+    .bindPopup("<b>HYERES</b><br>ZAC DU ROUBAUD<br>Code Postal: 83400<br>Gazole : 1.646 €<br>E10 : 1.720 €<br>SP98 : 1.820 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.11874, 5.9794])
+var marker = L.marker([43.107, 6.129])
     .addTo(map)
-    .bindPopup("<b>TOULON</b><br>2338 Avenue Joseph Gasquet<br>Code Postal: 83100<br>Gazole : 1.749 €<br>E10 : 1.829 €<br>SP98 : 1.929 €");
+    .bindPopup("<b>HYERES</b><br>ANGLE BD GEOFFROY ST HILAIRE<br>Code Postal: 83400<br>Gazole : 1.650 €<br>E10 : 1.720 €<br>SP98 : 1.820 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.1177114581, 5.94101238436])
+var marker = L.marker([43.12133, 6.13816])
     .addTo(map)
-    .bindPopup("<b>TOULON</b><br>322 AV.LE BELLEGOU RODE<br>Code Postal: 83000<br>Gazole : 1.672 €<br>E85 : 0.779 €<br>GPLc : 0.999 €<br>E10 : 1.744 €<br>SP98 : 1.857 €");
+    .bindPopup("<b>HYERES</b><br>2 AVENUE DU QUINZI�ME CORPS<br>Code Postal: 83400<br>Gazole : 1.769 €<br>E10 : 1.839 €<br>SP98 : 1.939 €");
 
 marker.on('click', function (e) {
     this.openPopup();
 });
-var marker = L.marker([43.13945251, 5.88654834])
+var marker = L.marker([43.0846876404, 6.14856278346])
     .addTo(map)
-    .bindPopup("<b>Toulon</b><br>620 Rue David<br>Code Postal: 83200<br>Gazole : 1.749 €<br>E10 : 1.829 €<br>SP98 : 1.929 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.11313, 5.93462])
-    .addTo(map)
-    .bindPopup("<b>TOULON</b><br>AV INFANTERIE DE MARINE<br>Code Postal: 83000<br>Gazole : 1.672 €<br>E10 : 1.744 €<br>SP98 : 1.857 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.128, 5.919])
-    .addTo(map)
-    .bindPopup("<b>TOULON</b><br>508 AVENUE FOCH<br>Code Postal: 83100<br>Gazole : 1.763 €<br>E85 : 0.789 €<br>E10 : 1.836 €<br>SP98 : 1.946 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.12367, 5.93697])
-    .addTo(map)
-    .bindPopup("<b>TOULON</b><br>160 BOULEVARD G.CLEMENCEAU<br>Code Postal: 83000<br>Gazole : 1.772 €<br>E85 : 0.789 €<br>GPLc : 1.019 €<br>E10 : 1.839 €<br>SP98 : 1.949 €");
-
-marker.on('click', function (e) {
-    this.openPopup();
-});
-var marker = L.marker([43.12814, 5.90563])
-    .addTo(map)
-    .bindPopup("<b>TOULON</b><br>95 Boulevard G�n�ral Brosset<br>Code Postal: 83200<br>Gazole : 1.729 €<br>SP95 : 1.869 €<br>SP98 : 1.969 €");
+    .bindPopup("<b>HYERES</b><br>CD 97 LE PALYVESTRE<br>Code Postal: 83400<br>Gazole : 1.759 €<br>E85 : 0.816 €<br>E10 : 1.829 €<br>SP98 : 1.939 €");
 
 marker.on('click', function (e) {
     this.openPopup();

@@ -12,6 +12,7 @@ import java.text.Normalizer
 import java.util.zip.ZipFile
 import javax.xml.parsers.DocumentBuilderFactory
 import org.xml.sax.InputSource
+import java.nio.charset.StandardCharsets
 
 class SourceXml : IDataSource {
 
@@ -37,7 +38,7 @@ class SourceXml : IDataSource {
 
         val xmlFile = File(extractedXmlPath)
         return if (xmlFile.exists() && xmlFile.length() > 0) {
-            xmlFile.readText()
+            xmlFile.readText(Charsets.UTF_8) // Force la lecture en UTF-8
         } else {
             logger.error("❌ Erreur : Le fichier XML extrait est vide.")
             ""
@@ -88,10 +89,15 @@ class SourceXml : IDataSource {
                 val codePostal = stationElement.getAttribute("cp") ?: "00000"
 
                 val villeNode = stationElement.getElementsByTagName("ville").item(0)
-                val ville = villeNode?.textContent ?: "Non précisée"
+                val rawVille = villeNode?.textContent ?: "Non précisée"
+                val ville = normalizeText(rawVille)
 
                 val adresseNode = stationElement.getElementsByTagName("adresse").item(0)
-                val adresse = adresseNode?.textContent ?: "Non précisée"
+                val rawAdresse = adresseNode?.textContent ?: "Non précisée"
+                val adresse = normalizeText(rawAdresse)
+
+                logger.info("🔍 Ville brute : $rawVille | Ville normalisée : $ville")
+                logger.info("🔍 Adresse brute : $rawAdresse | Adresse normalisée : $adresse")
 
                 val prixCarburants = mutableMapOf<String, String>()
                 val prixNodes = stationElement.getElementsByTagName("prix")
@@ -169,10 +175,23 @@ class SourceXml : IDataSource {
             false
         }
     }
-
+    
     private fun normalizeText(text: String): String {
-        return Normalizer.normalize(text, Normalizer.Form.NFD)
-            .replace("[\\p{InCombiningDiacriticalMarks}]".toRegex(), "")
-            .uppercase()
+        val normalized = Normalizer.normalize(text, Normalizer.Form.NFD)
+            .replace("[\\p{InCombiningDiacriticalMarks}]".toRegex(), "") // Supprime les accents
+            .replace("œ", "oe")
+            .replace("æ", "ae")
+            .replace("É", "E").replace("é", "e")
+            .replace("È", "E").replace("è", "e")
+            .replace("Ê", "E").replace("ê", "e")
+            .replace("Ë", "E").replace("ë", "e")
+            .replace("À", "A").replace("à", "a")
+            .replace("Ù", "U").replace("ù", "u")
+            .replace("Î", "I").replace("î", "i")
+            .replace("Ï", "I").replace("ï", "i")
+            .replace("Ô", "O").replace("ô", "o")
+
+        return normalized.uppercase()
     }
+
 }

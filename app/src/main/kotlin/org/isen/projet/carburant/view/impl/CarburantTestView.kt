@@ -67,7 +67,7 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         setShowGrid(true)
         gridColor = Color.GRAY
         autoResizeMode = JTable.AUTO_RESIZE_OFF
-        background = Color(245, 245, 245)
+        background = Color(230, 230, 230)
         selectionBackground = Color(52, 152, 219)
         selectionForeground = Color.WHITE
         getColumnModel().getColumn(5).cellRenderer = MultiLineTableCellRenderer()
@@ -89,7 +89,7 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
 
         val resultPanel = JPanel(BorderLayout()).apply {
             border = EmptyBorder(10, 10, 10, 10)
-            background = Color(240, 240, 240)
+            background = Color(230, 230, 230)
             val scrollPane = JScrollPane(resultTable).apply {
                 horizontalScrollBarPolicy = JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
                 verticalScrollBarPolicy = JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED
@@ -97,6 +97,12 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
             }
             add(scrollPane, BorderLayout.CENTER)
         }
+
+        val columnWidths = intArrayOf(100, 150, 350, 120, 120, 450)
+        for (i in columnWidths.indices) {
+            resultTable.columnModel.getColumn(i).preferredWidth = columnWidths[i]
+        }
+
 
         val searchPanel = JPanel(GridBagLayout()).apply {
             border = EmptyBorder(10, 10, 10, 10)
@@ -175,11 +181,15 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
             primarySourceButton, secondarySourceButton -> {
                 if (mode == 0) {
                     val city = cityTextField.text.trim()
+                    val selectedFuel = if (fuelTypeComboBox.selectedItem == "Aucun") null else fuelTypeComboBox.selectedItem.toString()
+                    val hasToilets = toiletsCheckBox.isSelected
+                    val hasAirPump = airPumpCheckBox.isSelected
+                    val hasFoodShop = foodShopCheckBox.isSelected
                     if (city.isEmpty()) {
                         JOptionPane.showMessageDialog(this, "🚨 Veuillez entrer une ville !", "Erreur", JOptionPane.ERROR_MESSAGE)
                         return
                     }
-                    ctrl.updateModelForCityWithSource(city, e.source == primarySourceButton)
+                    ctrl.updateModelForCityWithSource(city, e.source == primarySourceButton, selectedFuel, hasToilets, hasAirPump, hasFoodShop)
                 }
             }
             itineraireButton -> {
@@ -206,6 +216,10 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         itineraireButton.isEnabled = (mode == 1)
         primarySourceButton.isEnabled = (mode == 0)
         secondarySourceButton.isEnabled = (mode == 0)
+        toiletsCheckBox.isEnabled = (mode == 0)
+        airPumpCheckBox.isEnabled = (mode == 0)
+        foodShopCheckBox.isEnabled = (mode == 0)
+        fuelTypeComboBox.isEnabled = (mode == 0)
     }
 
     override fun display() {
@@ -230,7 +244,6 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
     }
 
     class MultiLineTableCellRenderer : JTextArea(), TableCellRenderer {
-
         init {
             lineWrap = true
             wrapStyleWord = true
@@ -242,26 +255,12 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
             hasFocus: Boolean, row: Int, column: Int
         ): Component {
             text = value?.toString() ?: ""
-
-            // 🎨 Appliquer les couleurs en fonction de la sélection
-            if (isSelected) {
-                background = table.selectionBackground
-                foreground = table.selectionForeground
-            } else {
-                background = table.background
-                foreground = table.foreground
-            }
-
-            // 📏 Ajustement automatique de la hauteur des lignes en fonction du contenu
-            val fontMetrics = getFontMetrics(font)
-            val cellWidth = table.columnModel.getColumn(column).width
-            val textWidth = fontMetrics.stringWidth(text)
-            val lineCount = (textWidth / cellWidth) + 1
-            table.setRowHeight(row, lineCount * fontMetrics.height)
-
+            background = if (isSelected) table.selectionBackground else table.background
+            foreground = if (isSelected) table.selectionForeground else table.foreground
             return this
         }
     }
+
 
 
 }

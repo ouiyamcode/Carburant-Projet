@@ -104,7 +104,8 @@ class SourceJson : IDataSource {
 
                 for ((jsonKey, nomCarburant) in carburantKeys) {
                     if (record[jsonKey] != null) {
-                        prixCarburants[nomCarburant] = (record[jsonKey] as Number).toString()
+                        val prixOriginal = (record[jsonKey] as Number).toDouble()
+                        prixCarburants[nomCarburant] = (prixOriginal * 1000).toString()
                     }
                 }
 
