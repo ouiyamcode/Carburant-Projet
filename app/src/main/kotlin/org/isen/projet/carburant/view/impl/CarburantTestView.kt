@@ -247,20 +247,26 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         }
     }
 
-    class MultiLineTableCellRenderer : JTextArea(), TableCellRenderer {
+    class MultiLineTableCellRenderer : JScrollPane(), TableCellRenderer {
+        private val textArea = JTextArea()
+
         init {
-            lineWrap = true
-            wrapStyleWord = true
-            isOpaque = true
+            textArea.lineWrap = true
+            textArea.wrapStyleWord = true
+            textArea.isOpaque = true
+            textArea.border = null
+            viewport.add(textArea)
+            verticalScrollBarPolicy = VERTICAL_SCROLLBAR_AS_NEEDED
+            horizontalScrollBarPolicy = HORIZONTAL_SCROLLBAR_NEVER
         }
 
         override fun getTableCellRendererComponent(
             table: JTable, value: Any?, isSelected: Boolean,
             hasFocus: Boolean, row: Int, column: Int
         ): Component {
-            text = value?.toString() ?: ""
-            background = if (isSelected) table.selectionBackground else table.background
-            foreground = if (isSelected) table.selectionForeground else table.foreground
+            textArea.text = value?.toString() ?: ""
+            textArea.background = if (isSelected) table.selectionBackground else table.background
+            textArea.foreground = if (isSelected) table.selectionForeground else table.foreground
             return this
         }
     }
