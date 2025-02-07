@@ -3,6 +3,7 @@
  */
 package org.isen.projet.carburant
 import javafx.application.Application
+import javafx.application.Platform
 import org.isen.projet.carburant.ctrl.CarburantController
 import org.isen.projet.carburant.data.impl.SourceJson
 import org.isen.projet.carburant.data.impl.SourceXml

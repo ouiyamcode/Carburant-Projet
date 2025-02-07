@@ -96,8 +96,8 @@ class SourceXml : IDataSource {
                 val rawAdresse = adresseNode?.textContent ?: "Non précisée"
                 val adresse = normalizeText(rawAdresse)
 
-                logger.info("🔍 Ville brute : $rawVille | Ville normalisée : $ville")
-                logger.info("🔍 Adresse brute : $rawAdresse | Adresse normalisée : $adresse")
+                /*logger.info("🔍 Ville brute : $rawVille | Ville normalisée : $ville")
+                logger.info("🔍 Adresse brute : $rawAdresse | Adresse normalisée : $adresse")*/
 
                 val prixCarburants = mutableMapOf<String, String>()
                 val prixNodes = stationElement.getElementsByTagName("prix")

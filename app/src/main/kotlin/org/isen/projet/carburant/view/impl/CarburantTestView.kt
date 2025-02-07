@@ -47,8 +47,11 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
         foreground = Color.WHITE
         font = Font("Arial", Font.BOLD, 14)
         isFocusPainted = false
+        isEnabled = false
         addActionListener {
-            CarburantMapView(ctrl).isVisible = true
+            val mapView = CarburantMapView(ctrl) // Nouvelle instance à chaque clic
+            mapView.defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE // Assurer la fermeture sans bloquer
+            mapView.isVisible = true
         }
     }
 
@@ -244,6 +247,7 @@ class CarburantTestView(private val ctrl: CarburantController) : JFrame("🔍 Re
                 val prix = station.prixCarburants.entries.joinToString("\n") { "${it.key}: ${it.value}€" }
                 tableModel.addRow(arrayOf(station.id, station.ville, station.adresse, station.latitude, station.longitude, prix))
             }
+            openMapButton.isEnabled = stations.isNotEmpty()
         }
     }
 
